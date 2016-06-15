@@ -50,12 +50,12 @@ class TimelineLog(models.Model):
 
         return timeline_log
 
-    def get_message(self, template):
+    def get_message(self, template=None):
         """
         Gets the 'log' message, describing the event performed.
 
         :param template: String representing the template to be used to render
-        the message.
+        the message. Defaults to ``self.template``.
         :return: The log message string.
         """
-        return render_to_string(template, {'log': self})
+        return render_to_string(template or self.template, {'log': self})
