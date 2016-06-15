@@ -1,0 +1,1 @@
+{{ log.timestamp }} - {{ log.user.email }} updated {{ log.content_object }} with {{ log.extra_data|safe }}.
