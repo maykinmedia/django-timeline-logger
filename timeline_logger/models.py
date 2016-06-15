@@ -22,6 +22,7 @@ class TimelineLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     extra_data = JSONField(null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    template = models.CharField(max_length=200, default='timeline_logger/default.txt')
 
     @classmethod
     def log_from_request(cls, request, content_object, **extra_data):
