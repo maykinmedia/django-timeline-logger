@@ -25,7 +25,7 @@ class TimelineLog(models.Model):
     template = models.CharField(max_length=200, default='timeline_logger/default.txt')
 
     @classmethod
-    def log_from_request(cls, request, content_object, **extra_data):
+    def log_from_request(cls, request, content_object, template=None, **extra_data):
         """
         Given an ``HTTPRequest`` object and a generic content, it creates a
         ``TimelineLog`` object to store the data of that request.
@@ -33,16 +33,21 @@ class TimelineLog(models.Model):
         :param request: A Django ``HTTPRequest`` object.
         :param content_object: A Django model instance. Any object can be
         related.
+        :param template: String representing the template to be used to render
+        the message. Defaults to 'default.txt'.
         :param extra_data: A dictionary (translatable into JSON) determining
         specifications of the action performed.
         :return: A newly created ``TimelineLog`` instance.
         """
-        user = request.user
-        user = user if isinstance(user, User) else None
+        try:
+            user = request.user
+        except AttributeError:
+            user = None
 
         timeline_log = cls.objects.create(
             content_object=content_object,
             extra_data=extra_data or None,
+            template=template or 'timeline_logger/default.txt',
             user=user,
         )
         logger.debug('Logged event in {0} {1}.'.format(
