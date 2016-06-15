@@ -16,7 +16,7 @@ class TimelineLoggerConf(AppConf):
     )
 
     class Meta:
-        prefix = 'timeline_logger'
+        prefix = 'timeline'
 
     def configure_timeline_actions(self, value):
         if value is None:
