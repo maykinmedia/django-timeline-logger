@@ -22,7 +22,6 @@ class TimelineLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     extra_data = JSONField(null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
-    action = models.CharField(max_length=50, choices=settings.TIMELINE_ACTIONS)
 
     @classmethod
     def log_from_request(cls, request, content_object, action, **extra_data):
@@ -45,7 +44,6 @@ class TimelineLog(models.Model):
             content_object=content_object,
             extra_data=extra_data or None,
             user=user,
-            action=action
         )
         logger.debug('Logged event in {0} {1}.'.format(
             content_object._meta.object_name, content_object.pk))
