@@ -24,7 +24,7 @@ class TimelineLog(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
 
     @classmethod
-    def log_from_request(cls, request, content_object, action, **extra_data):
+    def log_from_request(cls, request, content_object, **extra_data):
         """
         Given an ``HTTPRequest`` object and a generic content, it creates a
         ``TimelineLog`` object to store the data of that request.
@@ -32,7 +32,6 @@ class TimelineLog(models.Model):
         :param request: A Django ``HTTPRequest`` object.
         :param content_object: A Django model instance. Any object can be
         related.
-        :param action: One of the choices of ``settings.TIMELINE_ACTIONS``.
         :param extra_data: A dictionary (translatable into JSON) determining
         specifications of the action performed.
         :return: A newly created ``TimelineLog`` instance.
