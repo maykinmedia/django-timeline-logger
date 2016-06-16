@@ -1,1 +1,1 @@
-{{ log.timestamp }} - {% if log.user %}{{ log.user.email }}{% else %}Anonymous user{% endif %} event on {{ log.content_object }}.
+{{ log.timestamp|date:"Y-m-d H:i:s" }} - {% if log.user %}{{ log.user.email }}{% else %}Anonymous user{% endif %} event on {{ log.content_object }}.
