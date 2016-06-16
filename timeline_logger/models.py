@@ -5,7 +5,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField
 from django.db import models
-from django.template.loader import render_to_string
+from django.template.loader import get_template, render_to_string
 from django.utils.encoding import python_2_unicode_compatible
 
 from .conf import settings
@@ -43,6 +43,10 @@ class TimelineLog(models.Model):
             user = request.user
         except AttributeError:
             user = None
+
+        if template is not None:
+            # Ensure that the expected template actually exists.
+            get_template(template)
 
         timeline_log = cls.objects.create(
             content_object=content_object,
