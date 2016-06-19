@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timeline logger notification</title>
+</head>
+<body>
+  <h3>Events from {{ start_date|date:'Y-m-j' }}:</h3>
+
+  {% if logs %}
+    <ul>
+      {% for log in logs %}
+        <li>{{ log.get_message }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No events logged from that date until today.</p>
+  {% endif %}
+</body>
+</html>
