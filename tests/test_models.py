@@ -3,6 +3,7 @@ from unittest import skipIf
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.exceptions import TemplateDoesNotExist
+from django.template.defaultfilters import date
 from django.test import RequestFactory, TestCase
 from django.utils import timezone
 
@@ -101,8 +102,8 @@ class TimelineLogTestCase(TestCase):
 
         self.assertEqual(
             log.get_message(),
-            '{0} - Anonymous user event on {1}.'.format(
-                log.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+            '{0} - Anonymous user event on {1}.\n'.format(
+                date(log.timestamp, 'DATETIME_FORMAT'),
                 log.content_object
             )
         )

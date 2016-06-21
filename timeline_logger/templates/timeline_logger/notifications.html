@@ -1,11 +1,14 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Timeline logger notification</title>
+  <title>{% trans "Timeline logger notification" %}</title>
 </head>
 <body>
-  <h3>Events from {{ start_date|date:'Y-m-j' }}:</h3>
+  <h3>{% blocktrans trimmed start_date=start_date|date:'DATE_FORMAT' %}
+      Events from {{ start_date }}
+  {% endblocktrans %}</h3>
 
   {% if logs %}
     <ul>
@@ -14,7 +17,7 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>No events logged from that date until today.</p>
+    <p>{% trans "No events logged from that date until today." %}</p>
   {% endif %}
 </body>
 </html>
