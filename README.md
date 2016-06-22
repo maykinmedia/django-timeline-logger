@@ -2,6 +2,12 @@
 A reusable Django app to log actions and display them in a timeline
 
 
+[![Build Status](https://travis-ci.org/maykinmedia/django-timeline-logger.svg?branch=master)](https://travis-ci.org/maykinmedia/django-timeline-logger)
+[![Coverage Status](https://coveralls.io/repos/github/maykinmedia/django-timeline-logger/badge.svg?branch=master)](https://coveralls.io/github/maykinmedia/django-timeline-logger?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/maykinmedia/django-timeline-logger/badge.svg?branch=master)](https://coveralls.io/github/maykinmedia/django-timeline-logger?branch=master)
+[![PyPI version](https://badge.fury.io/py/django-timeline-logger.svg)](https://badge.fury.io/py/django-timeline-logger)
+
+
 ## Prerequisites
 
 This project uses `django.contrib.postgres.JSONField`, and as such, you need:
