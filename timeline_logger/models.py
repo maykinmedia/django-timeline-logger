@@ -1,17 +1,20 @@
 import logging
 
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.template.loader import get_template, render_to_string
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 from .conf import settings
 
 
 logger = logging.getLogger('timeline_logger')
+
+
+DEFAULT_TEMPLATE = settings.TIMELINE_DEFAULT_TEMPLATE
 
 
 @python_2_unicode_compatible
@@ -22,7 +25,17 @@ class TimelineLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     extra_data = JSONField(null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
-    template = models.CharField(max_length=200, default='timeline_logger/default.txt')
+    template = models.CharField(max_length=200, default=DEFAULT_TEMPLATE)
+
+    class Meta:
+        verbose_name = _('timeline log entry')
+        verbose_name_plural = _('timeline log entries')
+
+    def __str__(self):
+        return "{ct} - {pk}".format(
+            ct=self.content_type._meta.object_name,
+            pk=self.object_id
+        )
 
     @classmethod
     def log_from_request(cls, request, content_object, template=None, **extra_data):
@@ -51,12 +64,10 @@ class TimelineLog(models.Model):
         timeline_log = cls.objects.create(
             content_object=content_object,
             extra_data=extra_data or None,
-            template=template or 'timeline_logger/default.txt',
+            template=template or DEFAULT_TEMPLATE,
             user=user,
         )
-        logger.debug('Logged event in {0} {1}.'.format(
-            content_object._meta.object_name, content_object.pk))
-
+        logger.debug('Logged event in %s %s', content_object._meta.object_name, content_object.pk)
         return timeline_log
 
     def get_message(self, template=None):

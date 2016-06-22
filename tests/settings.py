@@ -4,6 +4,7 @@ DATABASES = {
     'default': {
         # Memory resident database, for easy testing.
         'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
     }
 }
 

@@ -1,1 +1,3 @@
-{{ log.timestamp|date:"Y-m-d H:i:s" }} - {% if log.user %}{{ log.user.email }}{% else %}Anonymous user{% endif %} event on {{ log.content_object }}.
+{% load i18n %}{% blocktrans trimmed with timestamp=log.timestamp|date:'DATETIME_FORMAT' user=log.user|default:_('Anonymous user') object=log.content_object %}
+{{ timestamp }} - {{ user }} event on {{ object }}.
+{% endblocktrans %}

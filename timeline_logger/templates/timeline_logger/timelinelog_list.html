@@ -1,0 +1,9 @@
+{% extends "timeline_logger/base.html" %}
+
+{% block timeline %}
+    <ul>
+    {% for log in object_list %}
+        <li>{{ log.get_message }}</li>
+    {% endfor %}
+    </ul>
+{% endblock timeline %}

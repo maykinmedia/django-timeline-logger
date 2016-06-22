@@ -1,0 +1,15 @@
+language: python
+python:
+  - "3.5"
+
+install:
+  - pip install codecov coveralls tox
+script:
+  - tox -- --cov --cov-report=
+after_success:
+  - coveralls
+  - codecov
+env:
+  - TOXENV=py27-django19
+  - TOXENV=py34-django19
+  - TOXENV=py35-django19

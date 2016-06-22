@@ -1,0 +1,3 @@
+include *.md
+include LICENSE
+recursive-include timeline_logger *.html *.txt
