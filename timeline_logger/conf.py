@@ -9,5 +9,7 @@ class TimelineLoggerConf(AppConf):
 
     DEFAULT_TEMPLATE = 'timeline_logger/default.txt'
 
+    PAGINATE_BY = 25
+
     class Meta:
         prefix = 'timeline'
