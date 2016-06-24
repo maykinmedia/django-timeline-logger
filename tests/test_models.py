@@ -50,7 +50,7 @@ class TimelineLogTestCase(TestCase):
 
         self.assertEqual(log.user, self.user)
 
-    @skipIf(settings.DATABASES['default']['ENGINE'] != 'django.db.backends.postgresql_psycopg2',
+    @skipIf(settings.DATABASES['default']['ENGINE'] != 'django.db.backends.postgresql',
             "'JSONField' can only be used in a PostgreSQL database.")
     def test_log_from_request_no_extra_data(self):
         """
@@ -61,7 +61,7 @@ class TimelineLogTestCase(TestCase):
 
         self.assertIsNone(log.extra_data)
 
-    @skipIf(settings.DATABASES['default']['ENGINE'] != 'django.db.backends.postgresql_psycopg2',
+    @skipIf(settings.DATABASES['default']['ENGINE'] != 'django.db.backends.postgresql',
             "'JSONField' can only be used in a PostgreSQL database.")
     def test_log_from_request_with_extra_data(self):
         """

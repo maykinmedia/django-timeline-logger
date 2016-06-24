@@ -1,0 +1,2 @@
+{% load timeline %}
+{% render_message log extra_context='yes' %}
