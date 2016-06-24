@@ -14,3 +14,6 @@ INSTALLED_APPS = [
     'timeline_logger',
     'tests'
 ]
+
+
+ROOT_URLCONF = 'tests.test_urls'

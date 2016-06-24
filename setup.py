@@ -19,6 +19,7 @@ setup(
     zip_safe=False,
     setup_requires=['pytest-runner'],
     tests_require=[
+        'factory-boy',
         'psycopg2',
         'pytest',
         'pytest-cov',
