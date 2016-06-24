@@ -28,3 +28,26 @@ Add `'timeline_logger'` to your `INSTALLED_APPS`.
 Run the migrations:
 
     python manage.py migrate
+
+
+## Usage in templates
+
+A custom template tag is provided to render the message of a log entry, for example:
+
+```
+{% extends "timeline_logger/base.html" %}
+{% load timeline %}
+
+{% block timeline %}
+    <ul class="timeline__list col__22--vw">
+    {% for log in object_list %}
+        <li class="timeline__entry">
+            {% render_message log in_view=True %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock timeline %}
+
+```
+
+This way, you can pass extra context to the template used for the log object.
