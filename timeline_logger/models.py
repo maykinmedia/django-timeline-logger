@@ -70,7 +70,7 @@ class TimelineLog(models.Model):
         logger.debug('Logged event in %s %s', content_object._meta.object_name, content_object.pk)
         return timeline_log
 
-    def get_message(self, template=None):
+    def get_message(self, template=None, **extra_context):
         """
         Gets the 'log' message, describing the event performed.
 
@@ -78,4 +78,6 @@ class TimelineLog(models.Model):
         the message. Defaults to ``self.template``.
         :return: The log message string.
         """
-        return render_to_string(template or self.template, {'log': self})
+        context = {'log': self}
+        context.update(**extra_context)
+        return render_to_string(template or self.template, context)
