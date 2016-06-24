@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-timeline-logger',
-    version='0.2',
+    version='0.2.1',
     description='Generic event logger for Django models.',
     author='Maykin Media',
     author_email='support@maykinmedia.nl',
@@ -15,6 +15,8 @@ setup(
         'django-appconf',
     ],
     packages=find_packages(exclude=['tests*']),
+    include_package_data=True,
+    zip_safe=False,
     setup_requires=['pytest-runner'],
     tests_require=[
         'psycopg2',
