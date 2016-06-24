@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-timeline-logger',
-    version='0.2.1',
+    version='0.3',
     description='Generic event logger for Django models.',
     author='Maykin Media',
     author_email='support@maykinmedia.nl',
