@@ -6,8 +6,8 @@
   <title>{% trans "Timeline logger notification" %}</title>
 </head>
 <body>
-  <h3>{% blocktrans trimmed start_date=start_date|date:'DATE_FORMAT' %}
-      Events from {{ start_date }}
+  <h3>{% blocktrans trimmed with start_date=start_date|date:'DATE_FORMAT' %}
+      Events since {{ start_date }}
   {% endblocktrans %}</h3>
 
   {% if logs %}
