@@ -1,13 +1,15 @@
+import html
 import logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.core.management.base import BaseCommand, CommandError
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils.html import strip_tags
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from timeline_logger.models import TimelineLog
 
@@ -19,53 +21,59 @@ class Command(BaseCommand):
     help = 'Sends mail notifications for last events to (admin) users.'
 
     def add_arguments(self, parser):
-        parser.add_argument('--staff', action='store_true', default=False, help='Send emails only to staff users.')
-        parser.add_argument('--all', action='store_true', default=False, help="Send emails to all users (overrides 'staff').")
-        parser.add_argument('--days', type=str, help='An integer number with the number of days to look at from today.')
+        parser.add_argument(
+            '--days', type=int,
+            help='An integer number with the number of days to look at from today.'
+        )
+
+        recipients_group = parser.add_mutually_exclusive_group()
+        recipients_group.add_argument('--all', action='store_true', help=_('Send e-mail to all users'))
+        recipients_group.add_argument('--staff', action='store_true', help=_('Send e-mail to staff users'))
+        recipients_group.add_argument(
+            '--recipients-from-setting', action='store_true',
+            help=_('Send e-mail to adresses listed in settings.TIMELINE_DIGEST_EMAIL_RECIPIENTS')
+        )
 
     def handle(self, *args, **options):
-        staff_only = options.get('staff', False)
-        all_users = options.get('all', False)
-        days = options.get('days')
-        User = get_user_model()
+        # figure out the recipients
+        if options['recipients_from_setting']:
+            recipients = settings.TIMELINE_DIGEST_EMAIL_RECIPIENTS
+        else:
+            users = get_user_model()._default_manager.all()
+            if options['staff']:
+                users = users.filter(is_staff=True)
+            elif not options['all']:
+                users = users.filter(is_staff=True, is_superuser=True)
+            recipients = users.values_list(settings.TIMELINE_USER_EMAIL_FIELD, flat=True)
 
+        # filter the list of log objects to display
+        days = options.get('days')
+        queryset = TimelineLog.objects.order_by('-timestamp')
         if days:
             try:
-                start = datetime.today().date() - timedelta(days=days)
+                start = timezone.now() - timedelta(days=days)
             except TypeError:
                 raise CommandError("Incorrect 'start' parameter. 'start' must be a number of days.")
+            else:
+                queryset = queryset.filter(timestamp__gte=start)
 
-            logs = TimelineLog.objects.filter(timestamp__gte=start).order_by('-timestamp')
-        else:
-            logs = TimelineLog.objects.order_by('-timestamp')
-
-        if not logs:
+        if not queryset.exists():
             logger.info('No logs in timeline. No emails sent.')
             return
 
-        start_date = logs[0].timestamp.strftime('%Y-%m-%d')
-
-        if all_users:
-            receivers = User.objects.all()
-        elif staff_only:
-            receivers = User.objects.filter(is_staff=True)
-        else:
-            receivers = User.objects.filter(is_superuser=True)
-
-        receivers = receivers.values_list('email', flat=True)
-
-        context = {'logs': logs, 'start_date': start_date}
+        context = {
+            'logs': queryset,
+            'start_date': queryset[0].timestamp,
+        }
         html_content = render_to_string('timeline_logger/notifications.html', context)
-        text_content = strip_tags(html_content)
+        text_content = html.unescape(strip_tags(html_content))
 
         send_mail(
-            subject=_('Events timeline'),
+            subject=settings.TIMELINE_DIGEST_EMAIL_SUBJECT,
             message=text_content,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=receivers,
+            recipient_list=recipients,
             fail_silently=False,
             html_message=html_content
         )
-        logger.info(
-            'Notification emails sent to: {0}'.format(', '.join(receivers)))
-
+        logger.info('Notification emails sent to: %s', recipients)
