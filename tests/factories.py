@@ -1,6 +1,17 @@
 import factory
 
 
+class UserFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = 'auth.User'
+
+    first_name = 'Test'
+    last_name = 'User'
+    username = factory.Sequence(lambda n: 'user_{0}'.format(n))
+    email = factory.Sequence(lambda n: 'user_{0}@maykinmedia.nl'.format(n))
+    password = factory.PostGenerationMethodCall('set_password', 'testing')
+
+
 class ArticleFactory(factory.django.DjangoModelFactory):
 
     class Meta:
