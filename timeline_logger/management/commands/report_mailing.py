@@ -1,20 +1,5 @@
 import logging
-import sys
 from datetime import timedelta
-
-
-# Safely importing the HTML parser utility, highly dependent on Python versions
-if sys.version_info >= (3, 4):
-    # From v3.4.0 in advance
-    import html
-elif (3, 0) < sys.version_info < (3, 4):
-    # From v3.0 until 3.3
-    from html.parser import HTMLParser
-    html = HTMLParser()
-else:
-    # Python 2.x versions
-    from HTMLParser import HTMLParser
-    html = HTMLParser()
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -25,6 +10,7 @@ from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
 
+from timeline_logger.compat import html
 from timeline_logger.models import TimelineLog
 
 
