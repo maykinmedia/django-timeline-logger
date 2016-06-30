@@ -7,22 +7,14 @@ from django.contrib.auth.models import User
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.defaultfilters import date
 from django.test import RequestFactory, TestCase
-from django.utils import timezone
 
 from timeline_logger.models import TimelineLog
-from .models import Article
+from .factories import ArticleFactory
 
 
 class TimelineLogTestCase(TestCase):
     def setUp(self):
-        self.article = Article.objects.create(
-            title='Data Analysis with Python',
-            abstract='An approach to data analysis using Python programming language.',
-            date=timezone.now().date(),
-            authors='José L. Patiño, Jos Vromans',
-            body='Here we will talk about something related to data analysis.',
-            bibliography="Python for Data Analysis, Wes McKinney, O'Reilly"
-        )
+        self.article = ArticleFactory.create()
 
         self.user = User.objects.create(username='john_doe', email='john.doe@maykinmedia.nl')
 
