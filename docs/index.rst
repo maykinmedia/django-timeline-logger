@@ -38,6 +38,8 @@ Contents
 
    installation
    usage
+   sending_log_reports
+   settings
 
 
 License
@@ -46,8 +48,8 @@ License
 Licensed under the `MIT License`_.
 
 
-Source Code
-===========
+Source Code and contributing
+============================
 
 The source code can be found on Github_.
 
