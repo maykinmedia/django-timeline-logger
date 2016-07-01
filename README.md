@@ -51,3 +51,8 @@ A custom template tag is provided to render the message of a log entry, for exam
 ```
 
 This way, you can pass extra context to the template used for the log object.
+
+
+## Documentation
+
+The extended documentation is available on [Read the Docs](http://django-timeline-logger.readthedocs.io/en/latest/).
