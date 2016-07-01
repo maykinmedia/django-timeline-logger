@@ -15,5 +15,6 @@ INSTALLED_APPS = [
     'tests'
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 ROOT_URLCONF = 'tests.test_urls'

@@ -1,4 +1,3 @@
-import html
 import logging
 from datetime import timedelta
 
@@ -11,6 +10,7 @@ from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
 
+from timeline_logger.compat import html
 from timeline_logger.models import TimelineLog
 
 
@@ -23,7 +23,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--days', type=int,
-            help='An integer number with the number of days to look at from today.'
+            help='An integer number with the number of days to look at from today to the past.'
         )
 
         recipients_group = parser.add_mutually_exclusive_group()
@@ -53,7 +53,7 @@ class Command(BaseCommand):
             try:
                 start = timezone.now() - timedelta(days=days)
             except TypeError:
-                raise CommandError("Incorrect 'start' parameter. 'start' must be a number of days.")
+                raise CommandError("Incorrect 'days' parameter. 'days' must be a number of days.")
             else:
                 queryset = queryset.filter(timestamp__gte=start)
 
@@ -71,7 +71,7 @@ class Command(BaseCommand):
         send_mail(
             subject=settings.TIMELINE_DIGEST_EMAIL_SUBJECT,
             message=text_content,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=settings.TIMELINE_DIGEST_FROM_EMAIL,
             recipient_list=recipients,
             fail_silently=False,
             html_message=html_content
