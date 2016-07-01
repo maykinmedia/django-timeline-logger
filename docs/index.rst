@@ -7,6 +7,17 @@
 Django Timeline Logger's documentation
 ======================================
 
+.. rubric:: A reusable Django app to log actions and display them in a timeline.
+
+.. image:: https://travis-ci.org/maykinmedia/django-timeline-logger.png
+    :target: https://travis-ci.org/maykinmedia/django-timeline-logger
+
+.. image:: https://coveralls.io/repos/github/maykinmedia/django-timeline-logger/badge.svg
+    :target: https://coveralls.io/github/maykinmedia/django-timeline-logger?branch=master
+
+.. image:: https://badge.fury.io/py/django-timeline-logger.svg
+    :target: https://badge.fury.io/py/django-timeline-logger
+
 
 Overview
 ========
@@ -40,6 +51,7 @@ Contents
    usage
    sending_log_reports
    settings
+   contributing
 
 
 License
@@ -52,6 +64,9 @@ Source Code and contributing
 ============================
 
 The source code can be found on Github_.
+
+Bugs can also be reported on the github_ repository, and pull requests
+are welcome. See :ref:`contributing` for more details.
 
 
 Indices and tables

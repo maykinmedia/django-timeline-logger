@@ -1,3 +1,5 @@
+.. _sending_log_reports:
+
 ===================
 Sending log reports
 ===================
