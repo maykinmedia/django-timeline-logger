@@ -11,7 +11,7 @@ addons:
 install:
   - pip install codecov coveralls tox
 script:
-  - tox -- --cov --cov-report=
+  - tox --
 after_success:
   - coveralls
   - codecov
