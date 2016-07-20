@@ -11,7 +11,7 @@ addons:
 install:
   - pip install codecov coveralls tox
 script:
-  - tox -- --cov --cov-report=
+  - tox --
 after_success:
   - coveralls
   - codecov
@@ -19,3 +19,7 @@ env:
   - TOXENV=py27-django19
   - TOXENV=py34-django19
   - TOXENV=py35-django19
+
+  - TOXENV=py27-django110
+  - TOXENV=py34-django110
+  - TOXENV=py35-django110

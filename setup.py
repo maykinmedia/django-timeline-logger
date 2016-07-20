@@ -5,13 +5,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-timeline-logger',
-    version='0.4.2',
+    version='0.5.0',
     description='Generic event logger for Django models.',
     author='Maykin Media',
     author_email='support@maykinmedia.nl',
     url='https://github.com/maykinmedia/django-timeline-logger',
     install_requires=[
-        'Django>=1.8',
+        'Django>=1.9',
         'django-appconf',
     ],
     packages=find_packages(exclude=['tests*']),
@@ -29,7 +29,7 @@ setup(
         'pytest-pythonpath',
     ],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Framework :: Django :: 1.9',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',

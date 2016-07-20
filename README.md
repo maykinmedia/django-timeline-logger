@@ -4,7 +4,6 @@ A reusable Django app to log actions and display them in a timeline
 
 [![Build Status](https://travis-ci.org/maykinmedia/django-timeline-logger.svg?branch=master)](https://travis-ci.org/maykinmedia/django-timeline-logger)
 [![codecov](https://codecov.io/gh/maykinmedia/django-timeline-logger/branch/develop/graph/badge.svg)](https://codecov.io/gh/maykinmedia/django-timeline-logger)
-[![Coverage Status](https://coveralls.io/repos/github/maykinmedia/django-timeline-logger/badge.svg?branch=master)](https://coveralls.io/github/maykinmedia/django-timeline-logger?branch=master)
 [![PyPI version](https://badge.fury.io/py/django-timeline-logger.svg)](https://badge.fury.io/py/django-timeline-logger)
 
 

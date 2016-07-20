@@ -1,3 +1,6 @@
+import os
+
+
 SECRET_KEY = 'Timeline logger'
 
 DATABASES = {
@@ -18,3 +21,17 @@ INSTALLED_APPS = [
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
 ROOT_URLCONF = 'tests.test_urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.abspath(
+                os.path.join(os.path.dirname(__file__), os.path.pardir))
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            # ... some options here ...
+        },
+    },
+]
