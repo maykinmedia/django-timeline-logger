@@ -12,8 +12,8 @@ Django Timeline Logger's documentation
 .. image:: https://travis-ci.org/maykinmedia/django-timeline-logger.png
     :target: https://travis-ci.org/maykinmedia/django-timeline-logger
 
-.. image:: https://coveralls.io/repos/github/maykinmedia/django-timeline-logger/badge.svg
-    :target: https://coveralls.io/github/maykinmedia/django-timeline-logger?branch=master
+.. image:: https://codecov.io/gh/maykinmedia/django-timeline-logger/branch/develop/graph/badge.svg
+    :target: https://codecov.io/gh/maykinmedia/django-timeline-logger
 
 .. image:: https://badge.fury.io/py/django-timeline-logger.svg
     :target: https://badge.fury.io/py/django-timeline-logger
@@ -65,7 +65,7 @@ Source Code and contributing
 
 The source code can be found on Github_.
 
-Bugs can also be reported on the github_ repository, and pull requests
+Bugs can also be reported on the Github_ repository, and pull requests
 are welcome. See :ref:`contributing` for more details.
 
 
