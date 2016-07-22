@@ -33,7 +33,7 @@ class TimelineLog(models.Model):
 
     def __str__(self):
         return "{ct} - {pk}".format(
-            ct=self.content_type._meta.object_name,
+            ct=self.content_type.name,
             pk=self.object_id
         )
 
