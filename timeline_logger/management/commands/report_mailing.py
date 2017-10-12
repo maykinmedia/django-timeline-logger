@@ -35,18 +35,19 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        # figure out the recipients
-        if options['recipients_from_setting']:
-            recipients = settings.TIMELINE_DIGEST_EMAIL_RECIPIENTS
-        else:
-            users = get_user_model()._default_manager.all()
-            if options['staff']:
-                users = users.filter(is_staff=True)
-            elif not options['all']:
-                users = users.filter(is_staff=True, is_superuser=True)
-            recipients = users.values_list(settings.TIMELINE_USER_EMAIL_FIELD, flat=True)
+        recipients = self.get_recipients(**options)
+        queryset = self.get_queryset(**options)
 
-        # filter the list of log objects to display
+        if not queryset.exists():
+            logger.info('No logs in timeline. No emails sent.')
+            return
+
+        self.send_email(recipients, queryset)
+
+    def get_queryset(self, **options):
+        """
+        Filters the list of log objects to display
+        """
         days = options.get('days')
         queryset = TimelineLog.objects.order_by('-timestamp')
         if days:
@@ -55,16 +56,30 @@ class Command(BaseCommand):
             except TypeError:
                 raise CommandError("Incorrect 'days' parameter. 'days' must be a number of days.")
             else:
-                queryset = queryset.filter(timestamp__gte=start)
+                return queryset.filter(timestamp__gte=start)
 
-        if not queryset.exists():
-            logger.info('No logs in timeline. No emails sent.')
-            return
+        return queryset
 
+    def get_recipients(self, **options):
+        """
+        Figures out the recipients
+        """
+        if options['recipients_from_setting']:
+            return settings.TIMELINE_DIGEST_EMAIL_RECIPIENTS
+
+        users = get_user_model()._default_manager.all()
+        if options['staff']:
+            users = users.filter(is_staff=True)
+        elif not options['all']:
+            users = users.filter(is_staff=True, is_superuser=True)
+        return users.values_list(settings.TIMELINE_USER_EMAIL_FIELD, flat=True)
+
+    def send_email(self, recipients, queryset):
         context = {
             'logs': queryset,
             'start_date': queryset[0].timestamp,
         }
+
         html_content = render_to_string('timeline_logger/notifications.html', context)
         text_content = html.unescape(strip_tags(html_content))
 

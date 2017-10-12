@@ -106,11 +106,11 @@ class ReportMailingTestCase(TestCase):
 
         # The 1st log `self.log_1` is NOT present in the email, because it was
         # generated before 15 days ago from today.
-        self.assertNotIn(self.log_1.timestamp.strftime('%B %-d, %Y'), mail.outbox[0].body)
+        self.assertNotIn(self.log_1.timestamp.strftime('%b. %-d, %Y'), mail.outbox[0].body)
 
         # The other logs `self.log_2` and `self.log_3` are properly
-        self.assertIn(self.log_2.timestamp.strftime('%B %-d, %Y'), mail.outbox[0].body)
-        self.assertIn(self.log_3.timestamp.strftime('%B %-d, %Y'), mail.outbox[0].body)
+        self.assertIn(self.log_2.timestamp.strftime('%b. %-d, %Y'), mail.outbox[0].body)
+        self.assertIn(self.log_3.timestamp.strftime('%b. %-d, %Y'), mail.outbox[0].body)
 
     def test_no_logs_recorded(self):
         """
