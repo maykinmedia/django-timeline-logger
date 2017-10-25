@@ -19,6 +19,7 @@ logger = logging.getLogger('timeline_logger')
 
 class Command(BaseCommand):
     help = 'Sends mail notifications for last events to (admin) users.'
+    template_name = 'timeline_logger/notifications.html'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -74,13 +75,15 @@ class Command(BaseCommand):
             users = users.filter(is_staff=True, is_superuser=True)
         return users.values_list(settings.TIMELINE_USER_EMAIL_FIELD, flat=True)
 
-    def send_email(self, recipients, queryset):
-        context = {
+    def get_context(self, queryset):
+        return {
             'logs': queryset,
             'start_date': queryset[0].timestamp,
         }
 
-        html_content = render_to_string('timeline_logger/notifications.html', context)
+    def send_email(self, recipients, queryset):
+        context = self.get_context(queryset)
+        html_content = render_to_string(self.template_name, context)
         text_content = html.unescape(strip_tags(html_content))
 
         send_mail(
