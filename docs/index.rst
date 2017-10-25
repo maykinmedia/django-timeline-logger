@@ -36,7 +36,7 @@ Requirements
 Django Timeline Logger makes use of Django's ``contrib.postgres.JSONField``,
 then your backend will need:
 
-   - At least Django-1.9_.
+   - At least Django-1.10_.
    - At least PostgreSQL-9.4_.
    - At least psycopg2-2.5.4_.
 
@@ -77,7 +77,7 @@ Indices and tables
 * :ref:`search`
 
 
-.. _Django-1.9: https://docs.djangoproject.com/en/1.9/releases/1.9/
+.. _Django-1.10: https://docs.djangoproject.com/en/1.10/releases/1.10/
 .. _PostgreSQL-9.4: https://www.postgresql.org/docs/9.4/static/release-9-4.html
 .. _psycopg2-2.5.4: https://pypi.python.org/pypi/psycopg2/2.5.4
 .. _MIT License: https://opensource.org/licenses/MIT
