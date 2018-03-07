@@ -19,12 +19,12 @@ DEFAULT_TEMPLATE = settings.TIMELINE_DEFAULT_TEMPLATE
 
 @python_2_unicode_compatible
 class TimelineLog(models.Model):
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
     timestamp = models.DateTimeField(auto_now_add=True)
     extra_data = JSONField(null=True, blank=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     template = models.CharField(max_length=200, default=DEFAULT_TEMPLATE)
 
     class Meta:
