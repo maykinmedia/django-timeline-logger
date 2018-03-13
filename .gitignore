@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *$py.class
 
@@ -87,3 +88,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# IDE project settings
+.idea/
+
+# vim tmp files
+*.swp
+
