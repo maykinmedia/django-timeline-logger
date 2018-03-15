@@ -1,6 +1,5 @@
 import os
 
-
 SECRET_KEY = 'Timeline logger'
 
 DATABASES = {

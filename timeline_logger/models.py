@@ -10,7 +10,6 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 
 from .conf import settings
 
-
 logger = logging.getLogger('timeline_logger')
 
 

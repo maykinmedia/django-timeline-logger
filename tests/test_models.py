@@ -4,11 +4,12 @@ from unittest import skipIf
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.template.exceptions import TemplateDoesNotExist
 from django.template.defaultfilters import date
+from django.template.exceptions import TemplateDoesNotExist
 from django.test import RequestFactory, TestCase
 
 from timeline_logger.models import TimelineLog
+
 from .factories import ArticleFactory
 
 

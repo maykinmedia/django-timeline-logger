@@ -1,17 +1,14 @@
 from datetime import timedelta
 
-try:
-    from unittest.mock import patch
-except ImportError:
-    from mock import patch
-
 from django.conf import settings
 from django.core import mail
-from django.core.management import call_command, CommandError
-from django.test import override_settings, TestCase
+from django.core.management import CommandError, call_command
+from django.template.defaultfilters import date
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 from timeline_logger.models import TimelineLog
+
 from .factories import ArticleFactory, UserFactory
 
 
@@ -104,13 +101,24 @@ class ReportMailingTestCase(TestCase):
 
         self.assertEqual(len(mail.outbox), 1)
 
+        mail_body = mail.outbox[0].body
+
         # The 1st log `self.log_1` is NOT present in the email, because it was
         # generated before 15 days ago from today.
-        self.assertNotIn(self.log_1.timestamp.strftime('%b. %-d, %Y'), mail.outbox[0].body)
+        self.assertNotIn(
+            date(self.log_1.timestamp, settings.DATETIME_FORMAT),
+            mail_body
+        )
 
         # The other logs `self.log_2` and `self.log_3` are properly
-        self.assertIn(self.log_2.timestamp.strftime('%b. %-d, %Y'), mail.outbox[0].body)
-        self.assertIn(self.log_3.timestamp.strftime('%b. %-d, %Y'), mail.outbox[0].body)
+        self.assertIn(
+            date(self.log_2.timestamp, settings.DATETIME_FORMAT),
+            mail_body
+        )
+        self.assertIn(
+            date(self.log_3.timestamp, settings.DATETIME_FORMAT),
+            mail_body
+        )
 
     def test_no_logs_recorded(self):
         """

@@ -1,9 +1,8 @@
 from __future__ import unicode_literals
 
+from appconf import AppConf
 from django.conf import settings  # noqa
 from django.utils.translation import ugettext_lazy as _
-
-from appconf import AppConf
 
 
 class TimelineLoggerConf(AppConf):
