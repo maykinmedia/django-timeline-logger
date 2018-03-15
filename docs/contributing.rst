@@ -61,5 +61,5 @@ Please stick to PEP8, and use pylint or similar tools to check the code style. A
 for this. In general, we adhere to Django's coding style.
 
 
-.. _tox: https://testrun.org/tox/latest/
+.. _tox: https://tox.readthedocs.io/en/latest/
 .. _detox: https://pypi.python.org/pypi/detox/

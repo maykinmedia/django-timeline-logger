@@ -39,6 +39,12 @@ setup(
         'pytest-pythonpath',
         'pytest-runner',
     ],
+    extras_require={
+        'docs': [
+            'sphinx',
+            'sphinx_rtd_theme'
+        ],
+    },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django :: 1.11',
