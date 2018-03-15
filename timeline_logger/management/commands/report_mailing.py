@@ -13,7 +13,6 @@ from django.utils.translation import ugettext_lazy as _
 from timeline_logger.compat import html
 from timeline_logger.models import TimelineLog
 
-
 logger = logging.getLogger('timeline_logger')
 
 

@@ -1,6 +1,5 @@
 import sys
 
-
 # Safely importing the HTML parser utility, highly dependent on Python versions
 if sys.version_info >= (3, 4):
     # From v3.4.0 in advance

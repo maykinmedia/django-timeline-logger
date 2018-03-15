@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *$py.class
 
@@ -44,6 +45,7 @@ nosetests.xml
 coverage.xml
 cover/*
 .hypothesis/
+junit*.xml
 
 # Translations
 *.mo
@@ -87,3 +89,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# IDE project settings
+.idea/
+
+# vim tmp files
+*.swp
+

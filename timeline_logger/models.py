@@ -6,10 +6,9 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.template.loader import get_template, render_to_string
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 from .conf import settings
-
 
 logger = logging.getLogger('timeline_logger')
 
@@ -19,12 +18,28 @@ DEFAULT_TEMPLATE = settings.TIMELINE_DEFAULT_TEMPLATE
 
 @python_2_unicode_compatible
 class TimelineLog(models.Model):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(
+        ContentType,
+        verbose_name=_('content type'),
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+    )
+    object_id = models.TextField(
+        verbose_name=_('object id'),
+        blank=True, null=True
+    )
     content_object = GenericForeignKey('content_type', 'object_id')
-    timestamp = models.DateTimeField(auto_now_add=True)
-    extra_data = JSONField(null=True, blank=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    timestamp = models.DateTimeField(verbose_name=_('timestamp'), auto_now_add=True)
+    extra_data = JSONField(
+        verbose_name=_('extra data'),
+        null=True, blank=True,
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('user'),
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+    )
     template = models.CharField(max_length=200, default=DEFAULT_TEMPLATE)
 
     class Meta:
@@ -32,10 +47,13 @@ class TimelineLog(models.Model):
         verbose_name_plural = _('timeline log entries')
 
     def __str__(self):
-        return "{ct} - {pk}".format(
-            ct=self.content_type.name,
-            pk=self.object_id
-        )
+        if self.object_id:
+            return "{ct} - {pk}".format(
+                ct=self.content_type.name,
+                pk=self.object_id
+            )
+
+        return ugettext('TimelineLog Object')
 
     @classmethod
     def log_from_request(cls, request, content_object, template=None, **extra_data):

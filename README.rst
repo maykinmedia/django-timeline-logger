@@ -19,7 +19,7 @@ Prerequisites
 
 This project uses `django.contrib.postgres.JSONField`, and as such, you need:
 
-* at least Django 1.10
+* at least Django 1.11
 * at least PostgreSQL 9.4
 * at least psycopg2 2.5.4
 
@@ -31,7 +31,7 @@ Install from PyPI by running
 
     pip install django-timeline-logger
 
-Add `'timeline_logger'` to your `INSTALLED_APPS`.
+Add ``'timeline_logger'`` to your ``INSTALLED_APPS``.
 
 Run the migrations:
 
@@ -65,4 +65,4 @@ Documentation
 
 The extended documentation is available on `Read the Docs`_.
 
-.. _`Read the Docs`: http://django-timeline-logger.readthedocs.io/en/latest/
+.. _Read the Docs: http://django-timeline-logger.readthedocs.io/en/latest/
