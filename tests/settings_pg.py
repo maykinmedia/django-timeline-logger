@@ -1,11 +1,15 @@
-from .settings import *
+import os
+
+from .settings import *  # noqa
 
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'timeline_logger',
-        'USERNAME': 'postgres',
-        'PASSWORD': '',
+        'USER': os.getenv('PGUSER', 'postgres'),
+        'PASSWORD': os.getenv('PGPASSWORD', ''),
+        'HOST': os.getenv('PGHOST', ''),
+        'PORT': os.getenv('PGPORT', 5432),
     }
 }
