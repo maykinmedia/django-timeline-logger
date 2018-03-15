@@ -14,14 +14,14 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='django-timeline-logger',
-    version='0.8.0',
+    version='1.0',
     description='Generic event logger for Django models.',
     long_description=long_description,
     author='Maykin Media',
     author_email='support@maykinmedia.nl',
     url='https://github.com/maykinmedia/django-timeline-logger',
     install_requires=[
-        'Django>=1.10',
+        'Django>=1.11',
         'django-appconf',
     ],
     packages=find_packages(exclude=['tests*']),
@@ -41,7 +41,6 @@ setup(
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
-        'Framework :: Django :: 1.10',
         'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
         'Intended Audience :: Developers',
