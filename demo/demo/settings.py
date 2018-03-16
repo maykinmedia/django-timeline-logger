@@ -35,6 +35,8 @@ INSTALLED_APPS = [
 
     'import_export',
     'timeline_logger',
+
+    'demo_app.apps.DemoAppConfig',
 ]
 
 MIDDLEWARE = [
