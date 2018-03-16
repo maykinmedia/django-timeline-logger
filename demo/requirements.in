@@ -1,0 +1,5 @@
+django
+psycopg2
+django
+django-timeline-logger
+django-import-export

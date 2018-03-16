@@ -1,0 +1,376 @@
+[
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "timeline_logger",
+        "model": "timelinelog"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "12tpsg8ckkpgofz5d65nz7hk9xl5f2ti",
+    "fields": {
+        "session_data": "MmUyMzMyYzU1YTg0MDNlODRmOWJlMDMxYWYwZGIwN2M3NmVhZWQ1Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiZWYyM2NmMGJlNTUxZWEzNTlmNDdmM2UwMDI0NTg1MjU5M2UyMGRiIn0=",
+        "expire_date": "2018-03-30T16:06:32.758Z"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add timeline log entry",
+        "content_type": [
+            "timeline_logger",
+            "timelinelog"
+        ],
+        "codename": "add_timelinelog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change timeline log entry",
+        "content_type": [
+            "timeline_logger",
+            "timelinelog"
+        ],
+        "codename": "change_timelinelog"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete timeline log entry",
+        "content_type": [
+            "timeline_logger",
+            "timelinelog"
+        ],
+        "codename": "delete_timelinelog"
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$100000$SuW3MVeW7NY3$TZCo2U8r4avNt5DU5MR2EU3V18JmflnertPK9Bqt9SQ=",
+        "last_login": "2018-03-16T16:06:32.755Z",
+        "is_superuser": true,
+        "username": "timeline-logger",
+        "first_name": "",
+        "last_name": "",
+        "email": "demo@maykinmedia.nl",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2018-03-16T16:06:01.337Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "timeline_logger.timelinelog",
+    "pk": 1,
+    "fields": {
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "object_id": "1",
+        "timestamp": "2018-03-16T16:07:10.998Z",
+        "extra_data": {
+            "action": "created"
+        },
+        "user": [
+            "timeline-logger"
+        ],
+        "template": "timeline_logger/default.txt"
+    }
+},
+{
+    "model": "timeline_logger.timelinelog",
+    "pk": 2,
+    "fields": {
+        "content_type": null,
+        "object_id": "",
+        "timestamp": "2018-03-16T16:07:30.440Z",
+        "extra_data": {
+            "message": "Some system action not tied to any object"
+        },
+        "user": null,
+        "template": "timeline_logger/default.txt"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2018-03-16T16:07:11.001Z",
+        "user": [
+            "timeline-logger"
+        ],
+        "content_type": [
+            "timeline_logger",
+            "timelinelog"
+        ],
+        "object_id": "1",
+        "object_repr": "user - 1",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2018-03-16T16:07:30.442Z",
+        "user": [
+            "timeline-logger"
+        ],
+        "content_type": [
+            "timeline_logger",
+            "timelinelog"
+        ],
+        "object_id": "2",
+        "object_repr": "TimelineLog Object",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+}
+]
