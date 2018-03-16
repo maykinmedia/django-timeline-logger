@@ -96,3 +96,4 @@ ENV/
 # vim tmp files
 *.swp
 
+demo/requirements.txt
