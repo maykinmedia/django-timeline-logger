@@ -158,3 +158,17 @@ part by this:
    )
 
 And the resulting log instance and message will be the same.
+
+Django-import-export integration
+================================
+
+Django-timeline-logger ships with a ``ModelResource``:
+
+.. code-block:: python
+
+    from timeline_logger.resources import TimelineLogResource
+
+    ...
+
+ It's not enabled in the default admin, as django-import-export is an
+ optional dependency.

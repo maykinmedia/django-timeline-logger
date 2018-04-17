@@ -1,9 +1,17 @@
 [run]
 branch = True
 source = timeline_logger
+omit =
+    demo/*
+    */migrations/*
+    */tests/*
 
 [report]
-omit = */migrations/*,*/tests/*
+omit =
+    demo/*
+    */migrations/*
+    */tests/*
+
 exclude_lines =
 	pragma: no cover
     noqa

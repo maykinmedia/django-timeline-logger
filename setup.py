@@ -14,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='django-timeline-logger',
-    version='1.0',
+    version='1.1',
     description='Generic event logger for Django models.',
     long_description=long_description,
     author='Maykin Media',
@@ -39,6 +39,12 @@ setup(
         'pytest-pythonpath',
         'pytest-runner',
     ],
+    extras_require={
+        'docs': [
+            'sphinx',
+            'sphinx_rtd_theme'
+        ],
+    },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django :: 1.11',

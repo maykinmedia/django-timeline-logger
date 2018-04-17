@@ -25,3 +25,4 @@ env:
   - TOXENV=py36-django20
 
   - TOXENV=isort
+  - TOXENV=docs
