@@ -2,6 +2,11 @@
 Changelog
 =========
 
+1.1.1 (2018-05-04)
+==================
+
+Added Dutch translations (PR#14, thanks @josvromans)
+
 1.1 (2018-04-17)
 ================
 
