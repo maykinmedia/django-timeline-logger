@@ -48,7 +48,6 @@ cover/*
 junit*.xml
 
 # Translations
-*.mo
 *.pot
 
 # Django stuff:
