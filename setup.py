@@ -14,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='django-timeline-logger',
-    version='1.1.1',
+    version='1.1.2',
     description='Generic event logger for Django models.',
     long_description=long_description,
     author='Maykin Media',
