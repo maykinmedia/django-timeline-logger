@@ -2,5 +2,7 @@ include *.md
 include LICENSE
 recursive-include timeline_logger *.html
 recursive-include timeline_logger *.txt
+recursive-include timeline_logger *.po
+recursive-include timeline_logger *.mo
 global-exclude __pycache__
 global-exclude *.py[co]
