@@ -2,6 +2,11 @@
 Changelog
 =========
 
+1.1.2 (2018-05-30)
+==================
+
+Fixed packaging mistake - Dutch translations are now included.
+
 1.1.1 (2018-05-04)
 ==================
 
