@@ -5,7 +5,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.template.loader import get_template, render_to_string
-from django.utils.encoding import python_2_unicode_compatible
+try:
+    from django.utils.encoding import python_2_unicode_compatible
+except ImportError:
+    # modern django 3.0 +
+    from six import python_2_unicode_compatible
 from django.utils.translation import ugettext, ugettext_lazy as _
 
 from .conf import settings
