@@ -17,10 +17,10 @@ A reusable Django app to log actions and display them in a timeline
 Prerequisites
 =============
 
-This project uses `django.contrib.postgres.JSONField`, and as such, you need:
+This project uses ``django.contrib.postgres.JSONField``, and as such, you need:
 
-* at least Django 1.11
-* at least PostgreSQL 9.4
+* at least Django 2.2+
+* at least PostgreSQL 10
 * at least psycopg2 2.5.4
 
 
