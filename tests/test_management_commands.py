@@ -16,7 +16,7 @@ class ReportMailingTestCase(TestCase):
     def setUp(self):
         self.article = ArticleFactory.create()
 
-        self.user = UserFactory.create(email='jose@maykinmedia.nl')
+        self.user = UserFactory.create(email="jose@maykinmedia.nl")
         self.staff_user = UserFactory.create(is_staff=True)
         self.admin_user = UserFactory.create(is_staff=True, is_superuser=True)
 
@@ -33,43 +33,50 @@ class ReportMailingTestCase(TestCase):
             user=self.user,
         )
 
-    @override_settings(TIMELINE_DIGEST_EMAIL_RECIPIENTS=['jose@maykinmedia.nl'])
+    @override_settings(TIMELINE_DIGEST_EMAIL_RECIPIENTS=["jose@maykinmedia.nl"])
     def test_recipients_from_setting_parameter(self):
         """
         The ``--recipients-from-setting`` parameter will send notifications
         only to those users listed in the ``TIMELINE_DIGEST_EMAIL_RECIPIENTS``
         setting.
         """
-        call_command('report_mailing', '--recipients-from-setting')
+        call_command("report_mailing", "--recipients-from-setting")
 
         self.assertEqual(len(mail.outbox), 1)
-        self.assertListEqual(mail.outbox[0].to, settings.TIMELINE_DIGEST_EMAIL_RECIPIENTS)
+        self.assertListEqual(
+            mail.outbox[0].to, settings.TIMELINE_DIGEST_EMAIL_RECIPIENTS
+        )
 
     def test_staff_parameter(self):
         """
         The ``--staff`` parameter will send notifications only to those users
         marked who have ``is_staff=True``.
         """
-        call_command('report_mailing', '--staff')
+        call_command("report_mailing", "--staff")
 
         self.assertEqual(len(mail.outbox), 1)
-        self.assertListEqual(mail.outbox[0].to, [self.staff_user.email, self.admin_user.email])
+        self.assertListEqual(
+            mail.outbox[0].to, [self.staff_user.email, self.admin_user.email]
+        )
 
     def test_all_parameter(self):
         """
         The ``--all`` parameter will send notifications to all users.
         """
-        call_command('report_mailing', '--all')
+        call_command("report_mailing", "--all")
 
         self.assertEqual(len(mail.outbox), 1)
-        self.assertListEqual(mail.outbox[0].to, [self.user.email, self.staff_user.email, self.admin_user.email])
+        self.assertListEqual(
+            mail.outbox[0].to,
+            [self.user.email, self.staff_user.email, self.admin_user.email],
+        )
 
     def test_no_recipients_parameter(self):
         """
         When no 'recipients' parameter is passed, only those users who are
         'staff' and 'superuser' will be notified.
         """
-        call_command('report_mailing')
+        call_command("report_mailing")
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertListEqual(mail.outbox[0].to, [self.admin_user.email])
@@ -83,7 +90,8 @@ class ReportMailingTestCase(TestCase):
             CommandError,
             "Incorrect 'days' parameter. 'days' must be a number of days.",
             call_command,
-            'report_mailing', days='NaN'
+            "report_mailing",
+            days="NaN",
         )
 
     def test_days_parameter_successful(self):
@@ -97,7 +105,7 @@ class ReportMailingTestCase(TestCase):
         self.log_1.save()
         self.log_2.save()
 
-        call_command('report_mailing', days=15)
+        call_command("report_mailing", days=15)
 
         self.assertEqual(len(mail.outbox), 1)
 
@@ -106,19 +114,12 @@ class ReportMailingTestCase(TestCase):
         # The 1st log `self.log_1` is NOT present in the email, because it was
         # generated before 15 days ago from today.
         self.assertNotIn(
-            date(self.log_1.timestamp, settings.DATETIME_FORMAT),
-            mail_body
+            date(self.log_1.timestamp, settings.DATETIME_FORMAT), mail_body
         )
 
         # The other logs `self.log_2` and `self.log_3` are properly
-        self.assertIn(
-            date(self.log_2.timestamp, settings.DATETIME_FORMAT),
-            mail_body
-        )
-        self.assertIn(
-            date(self.log_3.timestamp, settings.DATETIME_FORMAT),
-            mail_body
-        )
+        self.assertIn(date(self.log_2.timestamp, settings.DATETIME_FORMAT), mail_body)
+        self.assertIn(date(self.log_3.timestamp, settings.DATETIME_FORMAT), mail_body)
 
     def test_no_logs_recorded(self):
         """
@@ -127,7 +128,7 @@ class ReportMailingTestCase(TestCase):
         # Get rid of all the existent logs.
         TimelineLog.objects.all().delete()
 
-        call_command('report_mailing')
+        call_command("report_mailing")
 
         self.assertEqual(len(mail.outbox), 0)
 
@@ -136,18 +137,18 @@ class ReportMailingTestCase(TestCase):
         If the ``TIMELINE_DIGEST_FROM_EMAIL`` setting is not set, the backend
         will default to the Django's standard ``DEFAULT_FROM_EMAIL`` setting.
         """
-        call_command('report_mailing')
+        call_command("report_mailing")
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].from_email, settings.DEFAULT_FROM_EMAIL)
 
-    @override_settings(TIMELINE_DIGEST_FROM_EMAIL='reports@maykinmedia.nl')
+    @override_settings(TIMELINE_DIGEST_FROM_EMAIL="reports@maykinmedia.nl")
     def test_timeline_digest_from_email_setting(self):
         """
         If the ``TIMELINE_DIGEST_FROM_EMAIL`` setting is not set, the backend
         will default to the Django's standard ``DEFAULT_FROM_EMAIL`` setting.
         """
-        call_command('report_mailing')
+        call_command("report_mailing")
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].from_email, settings.TIMELINE_DIGEST_FROM_EMAIL)
