@@ -8,12 +8,15 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('timeline_logger', '0001_initial'),
+        ("timeline_logger", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='timelinelog',
-            options={'verbose_name': 'timeline log entry', 'verbose_name_plural': 'timeline log entries'},
+            name="timelinelog",
+            options={
+                "verbose_name": "timeline log entry",
+                "verbose_name_plural": "timeline log entries",
+            },
         ),
     ]

@@ -4,24 +4,19 @@ django-timeline-logger
 
 A reusable Django app to log actions and display them in a timeline
 
-.. image:: https://travis-ci.org/maykinmedia/django-timeline-logger.svg?branch=master
-    :target: https://travis-ci.org/maykinmedia/django-timeline-logger
+|build-status| |code-quality| |coverage| |black|
 
-.. image:: https://codecov.io/gh/maykinmedia/django-timeline-logger/branch/develop/graph/badge.svg
-    :target: https://codecov.io/gh/maykinmedia/django-timeline-logger
-
-.. image:: https://badge.fury.io/py/django-timeline-logger.svg
-    :target: https://badge.fury.io/py/django-timeline-logger
-
+|python-versions| |django-versions| |pypi-version|
 
 Prerequisites
 =============
 
-This project uses `django.contrib.postgres.JSONField`, and as such, you need:
+This project uses ``django.contrib.postgres.JSONField``, and as such, you need:
 
-* at least Django 1.11
-* at least PostgreSQL 9.4
+* at least Django 2.2+
+* at least PostgreSQL 10
 * at least psycopg2 2.5.4
+* A modern setuptools version
 
 
 Installation
@@ -66,3 +61,26 @@ Documentation
 The extended documentation is available on `Read the Docs`_.
 
 .. _Read the Docs: http://django-timeline-logger.readthedocs.io/en/latest/
+
+
+.. |build-status| image:: https://github.com/maykinmedia/django-timeline-logger/actions/workflows/ci.yml/badge.svg
+    :alt: Build status
+    :target: https://github.com/maykinmedia/django-timeline-logger/actions/workflows/ci.yml
+
+.. |code-quality| image:: https://github.com/maykinmedia/django-timeline-logger/actions//workflows/code_quality.yml/badge.svg
+    :alt: Code quality checks
+    :target: https://github.com/maykinmedia/django-timeline-logger/actions//workflows/code_quality.yml
+
+.. |coverage| image:: https://codecov.io/gh/maykinmedia/django-timeline-logger/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/maykinmedia/django-timeline-logger
+    :alt: Coverage status
+
+.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/django-timeline-logger.svg
+
+.. |django-versions| image:: https://img.shields.io/pypi/djversions/django-timeline-logger.svg
+
+.. |pypi-version| image:: https://img.shields.io/pypi/v/django-timeline-logger.svg
+    :target: https://pypi.org/project/django-timeline-logger/

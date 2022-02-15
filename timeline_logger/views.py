@@ -5,5 +5,5 @@ from .models import TimelineLog
 
 
 class TimelineLogListView(ListView):
-    queryset = TimelineLog.objects.order_by('-timestamp')
+    queryset = TimelineLog.objects.order_by("-timestamp")
     paginate_by = settings.TIMELINE_PAGINATE_BY

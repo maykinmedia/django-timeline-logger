@@ -3,8 +3,9 @@ from django.contrib import admin
 from import_export.admin import ExportMixin
 from import_export.formats import base_formats
 from import_export_xml.formats import XML
-from timeline_logger.models import TimelineLog
+
 from timeline_logger.admin import TimelineLogAdmin
+from timeline_logger.models import TimelineLog
 from timeline_logger.resources import TimelineLogResource
 
 admin.site.unregister(TimelineLog)

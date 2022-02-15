@@ -2,6 +2,16 @@
 Changelog
 =========
 
+2.0.0 (2022-02-15)
+==================
+
+No changes in functionality or public API, just our supported versions of Python/Django.
+
+* Dropped Python 2, Python < 3.6 support
+* Dropped Django 1.11, 2.0 and 2.1 support
+* Added explicit support for Django 2.2 and 3.2
+* Added explicit support for Python 3.6, 3.7, 3.8, 3.9 and 3.10
+
 1.1.2 (2018-05-30)
 ==================
 

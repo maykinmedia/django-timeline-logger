@@ -17,14 +17,16 @@ class TimelineLogTestCase(TestCase):
     def setUp(self):
         self.article = ArticleFactory.create()
 
-        self.user = User.objects.create(username='john_doe', email='john.doe@maykinmedia.nl')
+        self.user = User.objects.create(
+            username="john_doe", email="john.doe@maykinmedia.nl"
+        )
 
         self.timeline_log = TimelineLog.objects.create(
             content_object=self.article,
             user=self.user,
         )
 
-        self.request = RequestFactory().get('/my_object/')
+        self.request = RequestFactory().get("/my_object/")
 
     def test_log_from_request_no_user(self):
         """
@@ -43,8 +45,10 @@ class TimelineLogTestCase(TestCase):
 
         self.assertEqual(log.user, self.user)
 
-    @skipIf(settings.DATABASES['default']['ENGINE'] != 'django.db.backends.postgresql',
-            "'JSONField' can only be used in a PostgreSQL database.")
+    @skipIf(
+        settings.DATABASES["default"]["ENGINE"] != "django.db.backends.postgresql",
+        "'JSONField' can only be used in a PostgreSQL database.",
+    )
     def test_log_from_request_no_extra_data(self):
         """
         Test ``log_from_request`` method when no ``extra_data`` dictionary is
@@ -54,17 +58,16 @@ class TimelineLogTestCase(TestCase):
 
         self.assertIsNone(log.extra_data)
 
-    @skipIf(settings.DATABASES['default']['ENGINE'] != 'django.db.backends.postgresql',
-            "'JSONField' can only be used in a PostgreSQL database.")
+    @skipIf(
+        settings.DATABASES["default"]["ENGINE"] != "django.db.backends.postgresql",
+        "'JSONField' can only be used in a PostgreSQL database.",
+    )
     def test_log_from_request_with_extra_data(self):
         """
         Test ``log_from_request`` method when an ``extra_data`` dictionary is
         passed.
         """
-        extra_data = {
-            'status': 'published',
-            'institution': 'Utrecht University'
-        }
+        extra_data = {"status": "published", "institution": "Utrecht University"}
 
         log = TimelineLog.log_from_request(self.request, self.article, **extra_data)
 
@@ -76,7 +79,7 @@ class TimelineLogTestCase(TestCase):
         """
         log = TimelineLog.log_from_request(self.request, self.article)
 
-        self.assertEqual(log.template, 'timeline_logger/default.txt')
+        self.assertEqual(log.template, "timeline_logger/default.txt")
 
     def test_log_from_request_wrong_template(self):
         """
@@ -86,7 +89,9 @@ class TimelineLogTestCase(TestCase):
         self.assertRaises(
             TemplateDoesNotExist,
             TimelineLog.log_from_request,
-            self.request, self.article, 'non_existent.html'
+            self.request,
+            self.article,
+            "non_existent.html",
         )
 
     def test_get_message(self):
@@ -97,8 +102,7 @@ class TimelineLogTestCase(TestCase):
 
         self.assertEqual(
             log.get_message(),
-            '{0} - Anonymous user event on {1}.\n'.format(
-                date(log.timestamp, 'DATETIME_FORMAT'),
-                log.content_object
-            )
+            "{0} - Anonymous user event on {1}.\n".format(
+                date(log.timestamp, "DATETIME_FORMAT"), log.content_object
+            ),
         )
