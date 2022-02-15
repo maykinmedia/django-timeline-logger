@@ -42,8 +42,8 @@ jobs:
 
       - name: Run tests
         run: |
-          tox
           export TOXENV=py${PYTHON_VERSION/./}-django${DJANGO/./}
+          tox
           codecov -e TOXENV,DJANGO --file reports/coverage-${TOXENV}.xml
         env:
           PYTHON_VERSION: ${{ matrix.python }}
