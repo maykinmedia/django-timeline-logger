@@ -1,35 +1,36 @@
 import os
 
-SECRET_KEY = 'Timeline logger'
+SECRET_KEY = "Timeline logger"
 
 DATABASES = {
-    'default': {
+    "default": {
         # Memory resident database, for easy testing.
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
     }
 }
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 INSTALLED_APPS = [
-    'django.contrib.contenttypes',
-    'django.contrib.auth',
-    'timeline_logger',
-    'tests'
+    "django.contrib.contenttypes",
+    "django.contrib.auth",
+    "timeline_logger",
+    "tests",
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
 
-ROOT_URLCONF = 'tests.test_urls'
+ROOT_URLCONF = "tests.test_urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.abspath(
-                os.path.join(os.path.dirname(__file__), os.path.pardir))
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
         ],
-        'APP_DIRS': True,
-        'OPTIONS': {
+        "APP_DIRS": True,
+        "OPTIONS": {
             # ... some options here ...
         },
     },

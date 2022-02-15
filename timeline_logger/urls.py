@@ -1,8 +1,9 @@
-from django.conf.urls import url
+from django.urls import path
 
 from .views import TimelineLogListView
 
-app_name = 'timeline'
+app_name = "timeline"
+
 urlpatterns = [
-    url(r'^$', TimelineLogListView.as_view(), name='timeline'),
+    path("", TimelineLogListView.as_view(), name="timeline"),
 ]
