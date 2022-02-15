@@ -5,8 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class TimelineLoggerConfig(AppConfig):
-    name = 'timeline_logger'
-    verbose_name = _('Django Timeline Logger')
+    name = "timeline_logger"
+    verbose_name = _("Django Timeline Logger")
 
     def ready(self):
         from . import conf  # noqa

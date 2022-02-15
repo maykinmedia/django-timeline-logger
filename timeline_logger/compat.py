@@ -7,4 +7,5 @@ if sys.version_info >= (3, 4):
 else:
     # Python 2.x versions
     from HTMLParser import HTMLParser
+
     html = HTMLParser()
