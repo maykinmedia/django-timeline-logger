@@ -23,9 +23,18 @@ class TimelineLog(models.Model):
         blank=True,
         null=True,
     )
-    object_id = models.TextField(verbose_name=_("object id"), blank=True, null=True)
+    object_id = models.TextField(
+        verbose_name=_("object id"),
+        blank=True,
+        null=True,
+        db_index=True,
+    )
     content_object = GenericForeignKey("content_type", "object_id")
-    timestamp = models.DateTimeField(verbose_name=_("timestamp"), auto_now_add=True)
+    timestamp = models.DateTimeField(
+        verbose_name=_("timestamp"),
+        auto_now_add=True,
+        db_index=True,
+    )
     extra_data = models.JSONField(
         verbose_name=_("extra data"),
         encoder=DjangoJSONEncoder,
