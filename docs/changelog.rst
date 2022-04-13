@@ -10,6 +10,7 @@ Changelog
 * Swapped to Django's generic ``models.JSONField``, adding support for databases other
   than PostgreSQL
 * Changed primary key field to ``BigIntegerField`` for the ``TimelineLog`` model
+* Added database indices to speed up ``TimelineLog`` read operations
 
 2.0.0 (2022-02-15)
 ==================
