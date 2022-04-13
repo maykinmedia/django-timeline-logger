@@ -2,7 +2,7 @@ import logging
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.postgres.fields import JSONField
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.template.loader import get_template, render_to_string
 from django.utils.translation import gettext, gettext_lazy as _
@@ -26,8 +26,9 @@ class TimelineLog(models.Model):
     object_id = models.TextField(verbose_name=_("object id"), blank=True, null=True)
     content_object = GenericForeignKey("content_type", "object_id")
     timestamp = models.DateTimeField(verbose_name=_("timestamp"), auto_now_add=True)
-    extra_data = JSONField(
+    extra_data = models.JSONField(
         verbose_name=_("extra data"),
+        encoder=DjangoJSONEncoder,
         null=True,
         blank=True,
     )

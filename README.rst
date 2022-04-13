@@ -13,9 +13,8 @@ Prerequisites
 
 This project uses ``django.contrib.postgres.JSONField``, and as such, you need:
 
-* at least Django 2.2+
-* at least PostgreSQL 10
-* at least psycopg2 2.5.4
+* at least Django 3.2+
+* a database supporting ``django.db.models.JSONField``
 * A modern setuptools version
 
 
