@@ -2,6 +2,15 @@
 Changelog
 =========
 
+2.1.0 (2022-04-13)
+==================
+
+* Dropped support for end-of-life Django 2.2.x
+* Confirmed support for Django 4.0
+* Swapped to Django's generic ``models.JSONField``, adding support for databases other
+  than PostgreSQL
+* Changed primary key field to ``BigIntegerField`` for the ``TimelineLog`` model
+
 2.0.0 (2022-02-15)
 ==================
 
