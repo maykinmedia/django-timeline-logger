@@ -9,14 +9,9 @@ Django Timeline Logger's documentation
 
 .. rubric:: A reusable Django app to log actions and display them in a timeline.
 
-.. image:: https://travis-ci.org/maykinmedia/django-timeline-logger.png
-    :target: https://travis-ci.org/maykinmedia/django-timeline-logger
+|build-status| |code-quality| |coverage| |black|
 
-.. image:: https://codecov.io/gh/maykinmedia/django-timeline-logger/branch/develop/graph/badge.svg
-    :target: https://codecov.io/gh/maykinmedia/django-timeline-logger
-
-.. image:: https://badge.fury.io/py/django-timeline-logger.svg
-    :target: https://badge.fury.io/py/django-timeline-logger
+|python-versions| |django-versions| |pypi-version|
 
 
 Overview
@@ -33,13 +28,11 @@ customizable than the builtin "admin logs" generated via ``LogEntry``.
 Requirements
 ============
 
-Django Timeline Logger makes use of Django's ``contrib.postgres.JSONField``,
+Django Timeline Logger makes use of Django's ``django.db.models.JSONField``,
 then your backend will need:
 
-   - At least Django-1.11_.
-   - At least PostgreSQL-9.4_.
-   - At least psycopg2-2.5.4_.
-
+   - One of the maintained Django_ versions
+   - A database backend with support for the JSONField_ for your Django version
 
 Contents
 ========
@@ -78,8 +71,29 @@ Indices and tables
 * :ref:`search`
 
 
-.. _Django-1.11: https://docs.djangoproject.com/en/1.11/releases/1.11/
-.. _PostgreSQL-9.4: https://www.postgresql.org/docs/9.4/static/release-9-4.html
-.. _psycopg2-2.5.4: https://pypi.python.org/pypi/psycopg2/2.5.4
+.. _Django: https://www.djangoproject.com/download/
+.. _JSONField: https://docs.djangoproject.com/en/dev/ref/models/fields/#jsonfield
 .. _MIT License: https://opensource.org/licenses/MIT
 .. _Github: https://github.com/maykinmedia/django-timeline-logger
+
+.. |build-status| image:: https://github.com/maykinmedia/django-timeline-logger/actions/workflows/ci.yml/badge.svg
+    :alt: Build status
+    :target: https://github.com/maykinmedia/django-timeline-logger/actions/workflows/ci.yml
+
+.. |code-quality| image:: https://github.com/maykinmedia/django-timeline-logger/actions//workflows/code_quality.yml/badge.svg
+    :alt: Code quality checks
+    :target: https://github.com/maykinmedia/django-timeline-logger/actions//workflows/code_quality.yml
+
+.. |coverage| image:: https://codecov.io/gh/maykinmedia/django-timeline-logger/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/maykinmedia/django-timeline-logger
+    :alt: Coverage status
+
+.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/django-timeline-logger.svg
+
+.. |django-versions| image:: https://img.shields.io/pypi/djversions/django-timeline-logger.svg
+
+.. |pypi-version| image:: https://img.shields.io/pypi/v/django-timeline-logger.svg
+    :target: https://pypi.org/project/django-timeline-logger/
