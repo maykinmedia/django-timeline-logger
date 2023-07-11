@@ -2,7 +2,6 @@ import factory
 
 
 class UserFactory(factory.django.DjangoModelFactory):
-
     first_name = "Test"
     last_name = "User"
     username = factory.Sequence(lambda n: "user_{0}".format(n))
