@@ -4,7 +4,7 @@
 Settings
 ========
 
-Timeline Logger default behaviour can also be customized by using the next
+Timeline Logger default behaviour can also be customized by using the following
 application settings in your project:
 
    - ``TIMELINE_DEFAULT_TEMPLATE``: defines the Django template used for the
