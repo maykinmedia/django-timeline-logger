@@ -17,9 +17,9 @@ Given those details, it's pretty clear how it works: whenever you want to log
 an event in your system, you create a ``TimelineLog`` for it, passing the data
 you consider useful in the context and using a template to render the message.
 
-The context is stored in a ``django.contrib.postgres.JSONField``, which basically
-accepts a Python dictionary representing JSON data, to be built by you with the
-data you want to pass to the message template.
+The context is stored in a ``django.db.models.JSONField``, which accepts a
+Python dictionary representing JSON data, to be built by you with the data you
+want to pass to the message template.
 
 
 Default example

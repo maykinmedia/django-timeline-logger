@@ -8,10 +8,10 @@ on:
       - develop
     tags:
     paths:
-      - '**.py'
+      - "**.py"
   pull_request:
     paths:
-      - '**.py'
+      - "**.py"
   workflow_dispatch:
 
 jobs:
@@ -20,12 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        toxenv: [isort, black]
+        toxenv: [isort, black, docs]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.7'
+          python-version: "3.11"
       - name: Install dependencies
         run: pip install tox
       - run: tox

@@ -28,5 +28,17 @@ Then, run the migrations:
 
    python manage.py migrate timeline_logger
 
+and configure your `urls.py` as you desire, e.g.
+
+.. code-block:: python
+
+    from django.contrib import admin
+    from django.urls import include, path
+
+    urlpatterns = [
+        path("admin/", admin.site.urls),
+        path("timeline/", include("timeline_logger.urls")),
+    ]
+
 You can now start using the application. Go to :ref:`usage` section for the
 details.
