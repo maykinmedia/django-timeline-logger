@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        python: ['3.10', '3.11', '3.12']
         django: ['3.2', '4.2']
         exclude:
-          - python: '3.12'
+          - python: ['3.11', '3.12']
             django: '3.2'
 
     services:
@@ -54,7 +54,7 @@ jobs:
           PGHOST: localhost
 
       - name: Publish coverage report
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v3
 
   publish:
     name: Publish package to PyPI
