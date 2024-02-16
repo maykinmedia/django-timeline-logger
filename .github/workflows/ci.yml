@@ -71,8 +71,8 @@ jobs:
 
       - name: Build sdist and wheel
         run: |
-          pip install pip setuptools wheel --upgrade
-          python setup.py sdist bdist_wheel
+          pip install build --upgrade
+          python -m build
 
       - name: Publish a Python distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
