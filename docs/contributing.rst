@@ -25,7 +25,7 @@ To run the tests in your (virtual) environment, simple execute
 
 .. code-block:: sh
 
-    python setup.py test
+    pytest
 
 This will run the tests with the current python version and Django version
 installed in your virtual environment.
