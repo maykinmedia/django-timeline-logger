@@ -20,9 +20,9 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-from pkg_resources import get_distribution
+from importlib.metadata import version as get_version
 
-FULL_VERSION = get_distribution("django-timeline-logger").version
+FULL_VERSION = get_version("django-timeline-logger")
 
 # -- General configuration ------------------------------------------------
 
@@ -53,7 +53,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Django Timeline Logger"
-copyright = "2016-2018, Maykin Media"
+copyright = "2016, Maykin Media"
 author = "Maykin Media"
 
 # The version info for the project you're documenting, acts as replacement for
