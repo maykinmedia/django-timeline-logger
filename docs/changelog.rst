@@ -2,6 +2,17 @@
 Changelog
 =========
 
+4.0.0 (2024-02-22)
+==================
+
+No changes in functionality or public API, just our supported versions of Python/Django.
+
+* Dropped Python < 3.10 support
+* Confirmed support for Python 3.12 (Removed usage of ``pkg_resources``)
+* Dropped support for Django 4.1
+* Update tooling and move to ``pyproject.toml``
+
+
 3.0.0 (2023-07-11)
 ==================
 
