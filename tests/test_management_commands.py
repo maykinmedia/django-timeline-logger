@@ -1,4 +1,5 @@
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone as dt_timezone
+from io import StringIO
 
 from django.conf import settings
 from django.core import mail
@@ -9,7 +10,7 @@ from django.utils import timezone
 
 from timeline_logger.models import TimelineLog
 
-from .factories import ArticleFactory, UserFactory
+from .factories import ArticleFactory, TimelineLogFactory, UserFactory
 
 
 class ReportMailingTestCase(TestCase):
@@ -152,3 +153,39 @@ class ReportMailingTestCase(TestCase):
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].from_email, settings.TIMELINE_DIGEST_FROM_EMAIL)
+
+
+class PruneTimelineLogsTestCase(TestCase):
+    def setUp(self):
+
+        self.log_1 = TimelineLogFactory.create()
+        self.log_1.timestamp = datetime(2024, 3, 1, 12, 0, 0, tzinfo=dt_timezone.utc)
+        self.log_1.save()
+
+        self.log_2 = TimelineLogFactory.create()
+        self.log_2.timestamp = datetime(2024, 3, 1, 14, 0, 0, tzinfo=dt_timezone.utc)
+        self.log_2.save()
+
+    def test_prune_timeline_logs_no_date(self):
+        stdout = StringIO()
+
+        call_command(
+            "prune_timeline_logs", interactive=False, verbosity=0, stdout=stdout
+        )
+
+        self.assertEqual(TimelineLog.objects.count(), 0)
+        stdout.seek(0)
+        self.assertEqual(stdout.read().strip(), "Successfully deleted 2 timeline logs.")
+
+    def test_prune_timeline_logs_date(self):
+        call_command(
+            "prune_timeline_logs",
+            "--before",
+            "2024-03-01T13:00:00+00:00",
+            interactive=False,
+            verbosity=0,
+            stdout=StringIO(),
+        )
+
+        self.assertEqual(TimelineLog.objects.count(), 1)
+        self.assertEqual(TimelineLog.objects.first().pk, self.log_2.pk)
