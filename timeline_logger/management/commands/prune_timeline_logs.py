@@ -1,9 +1,8 @@
-from datetime import datetime
 from textwrap import dedent
 
 from django.core.management.base import BaseCommand
 
-from timeline_logger.models import TimelineLog
+from timeline_logger.service import prune_timeline_logs
 
 
 class Command(BaseCommand):
@@ -17,21 +16,30 @@ class Command(BaseCommand):
             dest="interactive",
             help="Tells Django to NOT prompt the user for input of any kind.",
         )
-        parser.add_argument(
-            "--before",
-            type=datetime.fromisoformat,
-            help="Only flush timeline logs older than the specified date.",
+        exclusive_group = parser.add_mutually_exclusive_group(required=True)
+
+        exclusive_group.add_argument(
+            "--all",
+            action="store_true",
+            help="Whether to delete all log records.",
+        )
+
+        exclusive_group.add_argument(
+            "--keep-days",
+            type=int,
+            help="Only delete records older than the specified number of days.",
         )
 
     def handle(self, *args, **options):
+        all = options["all"]
+        keep_days = options["keep_days"]
         interactive = options["interactive"]
-        before = options["before"]
 
-        if not before and interactive:
+        if all and interactive:
             confirm = input(
                 dedent(
-                    """You haven't specified a date to limit the objects to be deleted.
-                This will delete all timeline logs objects. Are you sure you want to do this?
+                    """You have specified "--all", meaning all timeline logs will be deleted.
+                Are you sure you want to do this?
 
                 Type 'yes' to continue, or 'no' to cancel: """
                 )
@@ -40,11 +48,7 @@ class Command(BaseCommand):
             confirm = "yes"
 
         if confirm == "yes":
-            if before:
-                qs = TimelineLog.objects.filter(timestamp__lte=before)
-            else:
-                qs = TimelineLog.objects.all()
-            number, _ = qs.delete()
+            number = prune_timeline_logs(keep_days=0 if all else keep_days)
             self.stdout.write(f"Successfully deleted {number} timeline logs.")
         else:
             self.stdout.write("Flush cancelled.")

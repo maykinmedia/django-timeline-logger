@@ -42,6 +42,7 @@ Changelog = "https://github.com/maykinmedia/django-timeline-logger/blob/master/d
 [project.optional-dependencies]
 tests = [
     "factory-boy",
+    "time-machine",
     "psycopg2",
     "pytest",
     "pytest-cov",
