@@ -29,7 +29,9 @@ class TimelineLog(models.Model):
         null=True,
         db_index=True,
     )
-    content_object = GenericForeignKey("content_type", "object_id")
+    content_object = GenericForeignKey(
+        "content_type", "object_id", for_concrete_model=False
+    )
     timestamp = models.DateTimeField(
         verbose_name=_("timestamp"),
         auto_now_add=True,
