@@ -2,6 +2,17 @@
 Changelog
 =========
 
+5.0.0 (2024-10-30)
+==================
+
+Feature release
+
+* Dropped support for Django 3.2
+* The package is now distributed with the ``py.typed`` marker
+* Added manager method ``TimelineLog.objects.for_object``, making it easier to get all
+  log records related to a particular object.
+* Added python utility and management command to prune log records.
+
 4.0.0 (2024-02-22)
 ==================
 

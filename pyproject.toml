@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-timeline-logger"
-version = "4.0.0"
+version = "5.0.0"
 description = "Generic event logger for Django models."
 authors = [
     {name = "Maykin Media", email = "support@maykinmedia.nl"}
@@ -83,11 +83,9 @@ testpaths = ["tests"]
 DJANGO_SETTINGS_MODULE = "tests.settings_pg"
 
 [tool.bumpversion]
-current_version = "4.0.0"
+current_version = "5.0.0"
 files = [
     {filename = "pyproject.toml"},
-    {filename = "README.rst"},
-    {filename = "docs/changelog.rst"},
 ]
 
 [tool.coverage.run]
