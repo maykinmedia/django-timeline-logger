@@ -8,6 +8,7 @@ from django.template.loader import get_template, render_to_string
 from django.utils.translation import gettext, gettext_lazy as _
 
 from .conf import settings
+from .manager import TimelineLogManager
 
 logger = logging.getLogger("timeline_logger")
 
@@ -49,6 +50,8 @@ class TimelineLog(models.Model):
         null=True,
     )
     template = models.CharField(max_length=200, default=DEFAULT_TEMPLATE)
+
+    objects = TimelineLogManager()
 
     class Meta:
         verbose_name = _("timeline log entry")
