@@ -1,5 +1,6 @@
 include *.md
 include LICENSE
+include timeline_logger/py.typed
 recursive-include timeline_logger *.html
 recursive-include timeline_logger *.txt
 recursive-include timeline_logger *.po
