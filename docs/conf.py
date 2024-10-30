@@ -350,4 +350,5 @@ texinfo_documents = [
 
 linkcheck_ignore = [
     r"^http://localhost:\d+.*",
+    r"^https://opensource\.org/.*",  # appears to block Github Actions
 ]
