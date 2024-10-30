@@ -4,6 +4,7 @@ from unittest import skipIf
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db import models
 from django.template.defaultfilters import date
 from django.template.exceptions import TemplateDoesNotExist
 from django.test import RequestFactory, TestCase
@@ -11,6 +12,7 @@ from django.test import RequestFactory, TestCase
 from timeline_logger.models import TimelineLog
 
 from .factories import ArticleFactory
+from .models import Article
 
 
 class TimelineLogTestCase(TestCase):
@@ -106,3 +108,16 @@ class TimelineLogTestCase(TestCase):
                 date(log.timestamp, "DATETIME_FORMAT"), log.content_object
             ),
         )
+
+    def test_get_for_object(self):
+        with self.subTest("valid model instance"):
+            qs = TimelineLog.objects.for_object(self.article)
+
+            self.assertIsInstance(qs, models.QuerySet)
+            self.assertEqual(len(qs), 1)
+
+        with self.subTest("unsaved model instance"):
+            qs = TimelineLog.objects.for_object(Article)
+
+            self.assertIsInstance(qs, models.QuerySet)
+            self.assertEqual(len(qs), 0)
