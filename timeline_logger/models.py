@@ -5,6 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.template.loader import get_template, render_to_string
+from django.utils import timezone
 from django.utils.translation import gettext, gettext_lazy as _
 
 from .conf import settings
@@ -33,7 +34,9 @@ class TimelineLog(models.Model):
     content_object = GenericForeignKey("content_type", "object_id")
     timestamp = models.DateTimeField(
         verbose_name=_("timestamp"),
-        auto_now_add=True,
+        default=timezone.now,
+        editable=False,
+        blank=True,
         db_index=True,
     )
     extra_data = models.JSONField(

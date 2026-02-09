@@ -2,6 +2,10 @@ import os
 
 SECRET_KEY = "Timeline logger"
 
+TIME_ZONE = "Europe/Amsterdam"
+
+USE_TZ = True
+
 DATABASES = {
     "default": {
         # Memory resident database, for easy testing.

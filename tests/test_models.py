@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
 from unittest import skipIf
 
 from django.conf import settings
@@ -8,11 +9,17 @@ from django.db import models
 from django.template.defaultfilters import date
 from django.template.exceptions import TemplateDoesNotExist
 from django.test import RequestFactory, TestCase
+from django.utils import timezone
 
 from timeline_logger.models import TimelineLog
 
 from .factories import ArticleFactory
 from .models import Article
+
+
+def _format_timestamp(value: datetime) -> str:
+    local_value = timezone.localtime(value)
+    return date(local_value, settings.DATETIME_FORMAT)
 
 
 class TimelineLogTestCase(TestCase):
@@ -105,7 +112,8 @@ class TimelineLogTestCase(TestCase):
         self.assertEqual(
             log.get_message(),
             "{0} - Anonymous user event on {1}.\n".format(
-                date(log.timestamp, "DATETIME_FORMAT"), log.content_object
+                _format_timestamp(log.timestamp),
+                log.content_object,
             ),
         )
 
