@@ -66,12 +66,12 @@ The extended documentation is available on `Read the Docs`_.
     :alt: Build status
     :target: https://github.com/maykinmedia/django-timeline-logger/actions/workflows/ci.yml
 
-.. |code-quality| image:: https://github.com/maykinmedia/django-timeline-logger/actions//workflows/code_quality.yml/badge.svg
+.. |code-quality| image:: https://github.com/maykinmedia/django-timeline-logger/actions/workflows/code_quality.yml/badge.svg
     :alt: Code quality checks
-    :target: https://github.com/maykinmedia/django-timeline-logger/actions//workflows/code_quality.yml
+    :target: https://github.com/maykinmedia/django-timeline-logger/actions/workflows/code_quality.yml
 
-.. |coverage| image:: https://codecov.io/gh/maykinmedia/django-timeline-logger/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/maykinmedia/django-timeline-logger
+.. |coverage| image:: https://codecov.io/github/maykinmedia/django-timeline-logger/graph/badge.svg?token=ey3tios7Sn
+    :target: https://codecov.io/github/maykinmedia/django-timeline-logger
     :alt: Coverage status
 
 .. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
