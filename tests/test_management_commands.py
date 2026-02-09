@@ -15,6 +15,11 @@ from timeline_logger.models import TimelineLog
 from .factories import ArticleFactory, TimelineLogFactory, UserFactory
 
 
+def _format_timestamp(value: datetime) -> str:
+    local_value = timezone.localtime(value)
+    return date(local_value, settings.DATETIME_FORMAT)
+
+
 class ReportMailingTestCase(TestCase):
     def setUp(self):
         super().setUp()
@@ -117,13 +122,11 @@ class ReportMailingTestCase(TestCase):
 
         # The 1st log `self.log_1` is NOT present in the email, because it was
         # generated before 15 days ago from today.
-        self.assertNotIn(
-            date(self.log_1.timestamp, settings.DATETIME_FORMAT), mail_body
-        )
+        self.assertNotIn(_format_timestamp(self.log_1.timestamp), mail_body)
 
         # The other logs `self.log_2` and `self.log_3` are properly
-        self.assertIn(date(self.log_2.timestamp, settings.DATETIME_FORMAT), mail_body)
-        self.assertIn(date(self.log_3.timestamp, settings.DATETIME_FORMAT), mail_body)
+        self.assertIn(_format_timestamp(self.log_2.timestamp), mail_body)
+        self.assertIn(_format_timestamp(self.log_3.timestamp), mail_body)
 
     def test_no_logs_recorded(self):
         """
