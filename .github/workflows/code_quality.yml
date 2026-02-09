@@ -8,6 +8,8 @@ on:
     tags:
       - '*'
   pull_request:
+  schedule:
+    - cron: "23 5 * * *"
   workflow_dispatch:
 
 jobs:
