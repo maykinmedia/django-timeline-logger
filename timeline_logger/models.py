@@ -1,4 +1,5 @@
 import logging
+from typing import ClassVar, Self
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -25,7 +26,7 @@ class TimelineLog(models.Model):
         blank=True,
         null=True,
     )
-    object_id = models.TextField(
+    object_id = models.TextField(  # noqa: DJ001
         verbose_name=_("object id"),
         blank=True,
         null=True,
@@ -54,7 +55,7 @@ class TimelineLog(models.Model):
     )
     template = models.CharField(max_length=200, default=DEFAULT_TEMPLATE)
 
-    objects = TimelineLogManager()
+    objects: ClassVar[TimelineLogManager] = TimelineLogManager()  # pyright: ignore[reportIncompatibleVariableOverride]
 
     class Meta:
         verbose_name = _("timeline log entry")
@@ -62,12 +63,14 @@ class TimelineLog(models.Model):
 
     def __str__(self):
         if self.object_id:
-            return "{ct} - {pk}".format(ct=self.content_type.name, pk=self.object_id)
+            return f"{self.content_type.name} - {self.object_id}"
 
         return gettext("TimelineLog Object")
 
     @classmethod
-    def log_from_request(cls, request, content_object, template=None, **extra_data):
+    def log_from_request(
+        cls, request, content_object, template=None, **extra_data
+    ) -> Self:
         """
         Given an ``HTTPRequest`` object and a generic content, it creates a
         ``TimelineLog`` object to store the data of that request.

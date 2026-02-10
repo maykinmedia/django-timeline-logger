@@ -38,8 +38,8 @@ class Command(BaseCommand):
         if all and interactive:
             confirm = input(
                 dedent(
-                    """You have specified "--all", meaning all timeline logs will be deleted.
-                Are you sure you want to do this?
+                    """You have specified "--all", meaning all timeline logs will be
+                deleted. Are you sure you want to do this?
 
                 Type 'yes' to continue, or 'no' to cancel: """
                 )

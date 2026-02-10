@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone as dt_timezone
+from datetime import UTC, datetime, timedelta
 from io import StringIO
 
 from django.conf import settings
@@ -161,17 +161,17 @@ class ReportMailingTestCase(TestCase):
         self.assertEqual(mail.outbox[0].from_email, settings.TIMELINE_DIGEST_FROM_EMAIL)
 
 
-@time_machine.travel(datetime(2024, 3, 5, 0, 0, 0, tzinfo=dt_timezone.utc))
+@time_machine.travel(datetime(2024, 3, 5, 0, 0, 0, tzinfo=UTC))
 class PruneTimelineLogsTestCase(TestCase):
     def setUp(self):
         super().setUp()
 
         self.log_1 = TimelineLogFactory.create()
-        self.log_1.timestamp = datetime(2024, 3, 1, 0, 0, 0, tzinfo=dt_timezone.utc)
+        self.log_1.timestamp = datetime(2024, 3, 1, 0, 0, 0, tzinfo=UTC)
         self.log_1.save()
 
         self.log_2 = TimelineLogFactory.create()
-        self.log_2.timestamp = datetime(2024, 3, 4, 0, 0, 0, tzinfo=dt_timezone.utc)
+        self.log_2.timestamp = datetime(2024, 3, 4, 0, 0, 0, tzinfo=UTC)
         self.log_2.save()
 
     def test_prune_timeline_logs_no_date(self):

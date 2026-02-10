@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # Django Timeline Logger documentation build configuration file, created by
 # sphinx-quickstart on Thu Jun 30 17:07:28 2016.
