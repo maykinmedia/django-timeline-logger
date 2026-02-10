@@ -15,6 +15,9 @@ class TimelineLoggerConf(AppConf):
     DIGEST_EMAIL_SUBJECT = _("Events timeline")
     DIGEST_FROM_EMAIL = None
 
+    HANDLER_DISABLED = False
+    HANDLER_USE_QUEUE = True
+
     class Meta:
         prefix = "timeline"
 

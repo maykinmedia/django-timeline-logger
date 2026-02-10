@@ -32,6 +32,7 @@ requires-python = ">=3.12"
 dependencies = [
     "django>=4.2",
     "django-appconf",
+    "typing-extensions",
 ]
 
 [project.urls]
@@ -48,6 +49,7 @@ tests = [
     "psycopg",
     "pytest",
     "pytest-cov",
+    "pytest-env",
     "pytest-django",
     "tox",
     "ruff",
@@ -67,6 +69,12 @@ namespaces = false
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 DJANGO_SETTINGS_MODULE = "tests.settings_pg"
+markers = [
+    "real_db_close: do not patch timeline_logger.handlers.close_old_connections",
+]
+env = [
+    "_TIMELINE_LOGGER_DEFER_LISTENER=true",
+]
 
 [tool.bumpversion]
 current_version = "5.0.0"
