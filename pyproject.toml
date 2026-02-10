@@ -45,21 +45,12 @@ Changelog = "https://github.com/maykinmedia/django-timeline-logger/blob/master/d
 tests = [
     "factory-boy",
     "time-machine",
-    "psycopg2",
+    "psycopg",
     "pytest",
     "pytest-cov",
     "pytest-django",
-    "pytest-pep8",
-    "pytest-pylint",
-    "pytest-pythonpath",
-    "pytest-runner",
     "tox",
-    "black",
-    "isort",
-    "flake8",
-]
-coverage = [
-    "pytest-cov",
+    "ruff",
 ]
 docs = [
     "sphinx",
@@ -67,19 +58,11 @@ docs = [
 ]
 release = [
     "bump-my-version",
-    "twine",
 ]
 
 [tool.setuptools.packages.find]
 include = ["timeline_logger*"]
 namespaces = false
-
-[tool.isort]
-profile = "black"
-combine_as_imports = true
-known_django = "django"
-known_first_party="timeline_logger"
-sections=["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -110,7 +93,7 @@ exclude_also = [
     "@(abc\\.)?abstractmethod",
     "raise NotImplementedError",
     "\\.\\.\\.",
-    "\bpass$",
+    "\\bpass$",
 ]
 omit = [
     "demo/*",
@@ -118,5 +101,29 @@ omit = [
     "*/tests/*",
 ]
 
-[tool.coverage.html]
-directory = "cover"
+[tool.ruff.lint]
+extend-select = [
+    "UP",  # pyupgrade
+    "DJ",  # django
+    "LOG", # logging
+    "G",
+    "I",   # isort
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "PERF",# perflint
+    "B",   # flake8-bugbear
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+section-order = [
+    "future",
+    "standard-library",
+    "django",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.ruff.lint.isort.sections]
+"django" = ["django"]

@@ -9,7 +9,7 @@ Django Timeline Logger's documentation
 
 .. rubric:: A reusable Django app to log actions and display them in a timeline.
 
-|build-status| |code-quality| |coverage| |black|
+|build-status| |code-quality| |ruff| |coverage|
 
 |python-versions| |django-versions| |pypi-version|
 
@@ -24,15 +24,14 @@ It easily enables you to generate customized log messages on events, thus
 providing your backend with a logging system slightly more advanced and
 customizable than the builtin "admin logs" generated via ``LogEntry``.
 
-
 Requirements
 ============
 
-Django Timeline Logger makes use of Django's ``django.db.models.JSONField``,
-then your backend will need:
+Because Django Timeline Logger uses Django's ``django.db.models.JSONField``,
+your backend will need:
 
-   - One of the maintained Django_ versions
-   - A database backend with support for the JSONField_ for your Django version
+- One of the maintained Django_ versions
+- A database backend with support for the JSONField_ for your Django version
 
 Contents
 ========
@@ -53,7 +52,6 @@ License
 
 Licensed under the `MIT License`_.
 
-
 Source Code and contributing
 ============================
 
@@ -61,7 +59,6 @@ The source code can be found on Github_.
 
 Bugs can also be reported on the Github_ repository, and pull requests
 are welcome. See :ref:`contributing` for more details.
-
 
 Indices and tables
 ==================
@@ -72,7 +69,7 @@ Indices and tables
 
 
 .. _Django: https://www.djangoproject.com/download/
-.. _JSONField: https://docs.djangoproject.com/en/dev/ref/models/fields/#jsonfield
+.. _JSONField: https://docs.djangoproject.com/en/stable/ref/models/fields/#jsonfield
 .. _MIT License: https://opensource.org/licenses/MIT
 .. _Github: https://github.com/maykinmedia/django-timeline-logger
 
@@ -84,12 +81,13 @@ Indices and tables
     :alt: Code quality checks
     :target: https://github.com/maykinmedia/django-timeline-logger/actions/workflows/code_quality.yml
 
+.. |ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+    :target: https://github.com/astral-sh/ruff
+    :alt: Ruff
+
 .. |coverage| image:: https://codecov.io/github/maykinmedia/django-timeline-logger/graph/badge.svg?token=ey3tios7Sn
     :target: https://codecov.io/github/maykinmedia/django-timeline-logger
     :alt: Coverage status
-
-.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/psf/black
 
 .. |python-versions| image:: https://img.shields.io/pypi/pyversions/django-timeline-logger.svg
 

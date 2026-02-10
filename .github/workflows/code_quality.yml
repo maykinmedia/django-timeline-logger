@@ -18,7 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        toxenv: [isort, black, flake8, docs]
+        toxenv:
+          - ruff
+          - docs
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
