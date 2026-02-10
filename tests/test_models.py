@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from datetime import datetime
 from unittest import skipIf
 
@@ -111,10 +109,8 @@ class TimelineLogTestCase(TestCase):
 
         self.assertEqual(
             log.get_message(),
-            "{0} - Anonymous user event on {1}.\n".format(
-                _format_timestamp(log.timestamp),
-                log.content_object,
-            ),
+            f"{_format_timestamp(log.timestamp)} - Anonymous user event "
+            f"on {log.content_object}.\n",
         )
 
     def test_get_for_object(self):

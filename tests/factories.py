@@ -4,8 +4,8 @@ import factory
 class UserFactory(factory.django.DjangoModelFactory):
     first_name = "Test"
     last_name = "User"
-    username = factory.Sequence(lambda n: "user_{0}".format(n))
-    email = factory.Sequence(lambda n: "user_{0}@maykinmedia.nl".format(n))
+    username = factory.Sequence(lambda n: f"user_{n}")
+    email = factory.Sequence(lambda n: f"user_{n}@maykinmedia.nl")
     password = factory.PostGenerationMethodCall("set_password", "testing")
 
     class Meta:

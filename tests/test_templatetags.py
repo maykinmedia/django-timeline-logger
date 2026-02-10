@@ -1,9 +1,10 @@
+from unittest.mock import patch
+
 from django.conf import settings
 from django.template.loader import render_to_string
 
 import pytest
 
-from .compat import patch
 from .factories import TimelineLogFactory
 
 

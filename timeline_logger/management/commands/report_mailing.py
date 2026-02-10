@@ -1,3 +1,4 @@
+import html
 import logging
 from datetime import timedelta
 
@@ -8,9 +9,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.html import strip_tags
-from django.utils.translation import gettext_lazy as _
 
-from timeline_logger.compat import html
 from timeline_logger.models import TimelineLog
 
 logger = logging.getLogger("timeline_logger")
@@ -24,21 +23,25 @@ class Command(BaseCommand):
         parser.add_argument(
             "--days",
             type=int,
-            help="An integer number with the number of days to look at from today to the past.",
+            help=(
+                "An integer number with the number of days to look at from today "
+                "to the past."
+            ),
         )
 
         recipients_group = parser.add_mutually_exclusive_group()
         recipients_group.add_argument(
-            "--all", action="store_true", help=_("Send e-mail to all users")
+            "--all", action="store_true", help="Send e-mail to all users"
         )
         recipients_group.add_argument(
-            "--staff", action="store_true", help=_("Send e-mail to staff users")
+            "--staff", action="store_true", help="Send e-mail to staff users"
         )
         recipients_group.add_argument(
             "--recipients-from-setting",
             action="store_true",
-            help=_(
-                "Send e-mail to adresses listed in settings.TIMELINE_DIGEST_EMAIL_RECIPIENTS"
+            help=(
+                "Send e-mail to adresses listed in "
+                "settings.TIMELINE_DIGEST_EMAIL_RECIPIENTS"
             ),
         )
 
@@ -61,10 +64,10 @@ class Command(BaseCommand):
         if days:
             try:
                 start = timezone.now() - timedelta(days=days)
-            except TypeError:
+            except TypeError as exc:
                 raise CommandError(
                     "Incorrect 'days' parameter. 'days' must be a number of days."
-                )
+                ) from exc
             else:
                 return queryset.filter(timestamp__gte=start)
 
