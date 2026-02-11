@@ -2,6 +2,20 @@
 Changelog
 =========
 
+6.0.0 (2026-02-11)
+==================
+
+Feature and maintenance release.
+
+* Dropped support for Python versions older than 3.12.
+* Dropped support for Django versions older than 4.2.
+* Confirmed support for Python 3.12, 3.13, 3.14 and Django 5.2 and 6.0.
+* Added a custom logging handler that can save structured log messages to the database.
+* The default branch is renamed to ``main``.
+* CI now runs on a nightly cron schedule too.
+* Updated the Github Actions versions used.
+* We now use Ruff instead of black/isort/flake8.
+
 5.0.0 (2024-10-30)
 ==================
 
