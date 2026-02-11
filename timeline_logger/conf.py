@@ -17,6 +17,7 @@ class TimelineLoggerConf(AppConf):
 
     HANDLER_DISABLED = False
     HANDLER_USE_QUEUE = True
+    HANDLER_ON_ERROR = None
 
     class Meta:
         prefix = "timeline"

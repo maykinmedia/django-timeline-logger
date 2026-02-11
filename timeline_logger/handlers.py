@@ -25,7 +25,6 @@ import queue
 import threading
 import time
 from collections.abc import Callable
-from contextlib import contextmanager
 from logging.handlers import QueueHandler, QueueListener
 from typing import TYPE_CHECKING, Any
 
@@ -155,20 +154,6 @@ def _stop_listener():
             _listener = None
 
 
-@contextmanager
-def supress_errors():
-    """
-    Ensure that failing to save the logs does not crash the entire application.
-
-    XXX: should we add explicit transaction savepoint so we can recover when running in
-    the main thread?
-    """
-    try:
-        yield
-    except Exception as exc:
-        logger.error("log_saving_failed", exc_info=exc)
-
-
 class StructlogQueueHandler(QueueHandler):
     """
     Keep structlog log.record dict as a dict.
@@ -238,8 +223,19 @@ class TimelineLoggerHandler(logging.Handler):
         self.buffer = []
         self._last_flush = time.monotonic()
 
-    @supress_errors()
     def emit(self, record: logging.LogRecord):
+        try:
+            self._emit_to_db(record)
+        except Exception as exc:
+            self.handleError(record)
+
+            # XXX: should we add explicit transaction savepoint so we can recover when
+            # running in the main thread?
+            logger.error("log_saving_failed", exc_info=exc)
+            if on_error := settings.TIMELINE_HANDLER_ON_ERROR:
+                on_error(exc)
+
+    def _emit_to_db(self, record: logging.LogRecord):
         from .models import TimelineLog
 
         if settings.TIMELINE_HANDLER_DISABLED:

@@ -247,6 +247,25 @@ def test_handler_suppresses_unknown_errors(log_record: logging.LogRecord):
     assert not TimelineLog.objects.exists()
 
 
+@pytest.mark.django_db
+def test_handler_calls_on_error_callback_if_provided(
+    settings, log_record: logging.LogRecord
+):
+    errors_seen: set[Exception] = set()
+    settings.TIMELINE_HANDLER_ON_ERROR = lambda err: errors_seen.add(err)
+
+    def _raise(event_dict: EventDict):
+        raise Exception("oof")
+
+    handler = TimelineLoggerHandler(adapter=_raise, use_queue_mode=False)
+
+    result = handler.handle(log_record)
+
+    assert result is not False
+    assert len(errors_seen) == 1
+    assert errors_seen.pop().args[0] == "oof"
+
+
 @pytest.mark.real_db_close
 @pytest.mark.django_db(transaction=True)
 def test_integration_via_logging_dictconfig(
