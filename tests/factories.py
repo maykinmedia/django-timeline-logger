@@ -1,15 +1,23 @@
+from django.contrib.auth.models import User
+
 import factory
 
 
-class UserFactory(factory.django.DjangoModelFactory):
+class UserFactory(factory.django.DjangoModelFactory[User]):
     first_name = "Test"
     last_name = "User"
     username = factory.Sequence(lambda n: f"user_{n}")
     email = factory.Sequence(lambda n: f"user_{n}@maykinmedia.nl")
-    password = factory.PostGenerationMethodCall("set_password", "testing")
 
     class Meta:
         model = "auth.User"
+        skip_postgeneration_save = True
+
+    @factory.post_generation
+    def password(obj: User, create, extracted, **kwargs):
+        obj.set_password(extracted or "testing")
+        if create:
+            obj.save()
 
 
 class ArticleFactory(factory.django.DjangoModelFactory):
