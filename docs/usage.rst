@@ -4,23 +4,22 @@
 Usage
 =====
 
-Django Timeline Logger works by using a custom model ``TimelineLog``, which is
-designed to store:
+Django Timeline Logger provides a database model and table to store log events and
+their context. The model tracks:
 
-    - A Django model instance (a database object).
-    - A timestamp.
-    - A user instance (optional).
-    - A path to a template (optional, defaults to ``timeline_logger/default.txt``).
-    - A context (optional).
+* The Django model instance (database object) the log event is about.
+* Timestamp of when the log entry was created.
+* User instance related to the log event (optional).
+* Optional path to a Django template used for renderingen the log message (defaults to
+  ``timeline_logger/default.txt``).
+* Arbitrary context data, stored as JSON (optional).
 
-Given those details, it's pretty clear how it works: whenever you want to log
-an event in your system, you create a ``TimelineLog`` for it, passing the data
-you consider useful in the context and using a template to render the message.
+In *manual* mode, the package allows you to create ``TimelineLog`` entries whenever you
+want to log an event in your system by passing the relevant context, and you specify
+which template to render use to render the message.
 
-The context is stored in a ``django.db.models.JSONField``, which accepts a
-Python dictionary representing JSON data, to be built by you with the data you
-want to pass to the message template.
-
+.. tip:: You can also use structlog log events and send them to the database, see
+   :ref:`stdlib_logging_integration`.
 
 Default example
 ===============
@@ -170,5 +169,5 @@ Django-timeline-logger ships with a ``ModelResource``:
 
     ...
 
- It's not enabled in the default admin, as django-import-export is an
- optional dependency.
+It's not enabled in the default admin, as django-import-export is an
+optional dependency.

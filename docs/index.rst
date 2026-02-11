@@ -41,6 +41,7 @@ Contents
 
    installation
    usage
+   logging_integration
    sending_log_reports
    settings
    contributing
