@@ -12,6 +12,8 @@ on:
     - cron: "23 5 * * *"
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   linting:
     name: Code-quality checks
@@ -22,8 +24,10 @@ jobs:
           - ruff
           - docs
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version-file: "pyproject.toml"
       - name: Install dependencies
@@ -32,3 +36,19 @@ jobs:
         env:
           TOXENV: ${{ matrix.toxenv }}
           FORCE_COLOR: '1'
+
+  zizmor:
+    name: GitHub Actions Security Analysis with zizmor 🌈
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor 🌈
+        uses: zizmorcore/zizmor-action@b1d7e1fb5de872772f31590499237e7cce841e8e # v0.5.3
