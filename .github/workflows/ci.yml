@@ -21,12 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         python: ['3.12', '3.13', '3.14']
-        django: ['4.2', '5.2', '6.0']
-        exclude:
-          - python: '3.13'
-            django: '4.2'
-          - python: '3.14'
-            django: '4.2'
+        django: ['5.2', '6.0']
 
     services:
       postgres:
